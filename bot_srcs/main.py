@@ -1,10 +1,7 @@
-import Constants as keys
 from telegram.ext import *
 import Commands as cmd
 import Responses as resp
 import os
-
-print("Bot started...")
 
 def handle_message(update, context):
 	response = resp.letsbot_responses(update.message.text)
@@ -16,7 +13,8 @@ def error(update, context):
 def main():
 	apikey = os.getenv("APIKEY")
 	if (not apikey):
-		apikey = keys.API_KEY
+		print("APIKEY needed")
+		exit(1)
 	updater = Updater(apikey, use_context=True)
 	dp = updater.dispatcher
 
@@ -25,6 +23,7 @@ def main():
 	dp.add_handler(MessageHandler(Filters.text, handle_message))
 	dp.add_error_handler(error)
 
+	print("Bot started...")
 	updater.start_polling()
 	updater.idle()
 
