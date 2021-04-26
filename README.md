@@ -12,4 +12,4 @@ Telegram бот, который позволит удобно и быстро о
 формирует всю полезную информацию в одно сообщение, оперативно оповещает всех участников об итоговом решении.
 
 Status of last CI run:
-https://github.com/IamLena/trkpo/actions/workflows/CI/badge.svg
+![status](https://github.com/IamLena/trkpo/actions/workflows/main.yaml/badge.svg)
