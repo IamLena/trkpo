@@ -19,3 +19,5 @@ Telegram бот, который позволит удобно и быстро о
 Пока работает программа, живет бот.
 версия - Python 3.7.9
 
+Status of last CI run:
+![status](https://github.com/IamLena/trkpo/actions/workflows/main.yml/badge.svg)
