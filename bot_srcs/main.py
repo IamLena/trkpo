@@ -19,7 +19,9 @@ def main():
 	dp = updater.dispatcher
 
 	dp.add_handler(CommandHandler("start", cmd.start_command))
+	dp.add_handler(CommandHandler("info", cmd.info_command))
 	dp.add_handler(CommandHandler("help", cmd.help_command))
+
 	dp.add_handler(MessageHandler(Filters.text, handle_message))
 	dp.add_error_handler(error)
 
