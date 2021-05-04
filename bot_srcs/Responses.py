@@ -6,5 +6,5 @@ def letsbot_responses(input_text):
 
 	if user_message in ("пока", "до свидания"):
 		return "Возвращайся поскорее. Я буду ждать тебя!"
-	
+
 	return "Я не понимаю тебя... "
