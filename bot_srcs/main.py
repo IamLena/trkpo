@@ -3,6 +3,7 @@ import Commands as cmd
 import Responses as resp
 import os
 
+
 def handle_message(update, context):
 	response = resp.letsbot_responses(update.message.text)
 	update.message.reply_text(response)
@@ -14,7 +15,7 @@ def error(update, context):
 
 def main():
 	apikey = os.getenv("APIKEY")
-	if (not apikey):
+	if not apikey:
 		print("не обрнаружен APIKEY")
 		exit(1)
 	updater = Updater(apikey, use_context=True)
