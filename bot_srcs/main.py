@@ -8,7 +8,7 @@ def handle_message(update, context):
 	update.message.reply_text(response)
 
 def error(update, context):
-	print(f"Update {update} caused error {context.error}")
+print(f"Обноваление {update} вызвало ошибку {context.error}")
 
 def main():
 	apikey = os.getenv("APIKEY")
@@ -23,7 +23,7 @@ def main():
 	dp.add_handler(MessageHandler(Filters.text, handle_message))
 	dp.add_error_handler(error)
 
-	print("Bot started...")
+	print("Бот запущен...")
 	updater.start_polling()
 	updater.idle()
 
