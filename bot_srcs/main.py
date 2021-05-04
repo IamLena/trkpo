@@ -7,13 +7,15 @@ def handle_message(update, context):
 	response = resp.letsbot_responses(update.message.text)
 	update.message.reply_text(response)
 
+
 def error(update, context):
 	print(f"Обноваление {update} вызвало ошибку {context.error}")
+
 
 def main():
 	apikey = os.getenv("APIKEY")
 	if (not apikey):
-		print("APIKEY needed")
+		print("не обрнаружен APIKEY")
 		exit(1)
 	updater = Updater(apikey, use_context=True)
 	dp = updater.dispatcher
@@ -28,5 +30,6 @@ def main():
 	print("Бот запущен...")
 	updater.start_polling()
 	updater.idle()
+
 
 main()
