@@ -8,7 +8,7 @@ def handle_message(update, context):
 	update.message.reply_text(response)
 
 def error(update, context):
-print(f"Обноваление {update} вызвало ошибку {context.error}")
+	print(f"Обноваление {update} вызвало ошибку {context.error}")
 
 def main():
 	apikey = os.getenv("APIKEY")
