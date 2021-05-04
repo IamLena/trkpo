@@ -1,5 +1,5 @@
 def start_command(update, context):
-	update.message.reply_text("You are ready to plan a party, I see!")
+        update.message.reply_text("Я вижу, вы готовы устроить вечеринку!")
 
 def help_command(update, context):
-	update.message.reply_text("use /create_meeting command to start planing.")
+        update.message.reply_text("Используйте команду /create_meeting, чтобы начать планирование.")
