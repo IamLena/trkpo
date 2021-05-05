@@ -3,6 +3,9 @@ from telegram import User
 from database.Requests import *
 
 def start_conv(update, context):
+	# for test
+	mid = add_meeting("koko", update.message.chat.id)
+	update.message.reply_text(str(mid))
 	update.message.reply_text('Чтобы посмотреть сведения о мероприятии, введи идентификатор встречи. Если ты его не знаешь, выйди из режима просмотра информации с помощью /cancel и вызови /get_id. Получишь список идентификаторов встреч, участником которых ты являешься.')
 
 	return 1
@@ -11,6 +14,23 @@ def finish_conv(update, context):
 	update.message.reply_text('окей')
 	return ConversationHandler.END
 
+def form_output(meeting):
+	msg = '"' + meeting['name'] + '"\n'
+	if (meeting['start_time']):
+		msg += "Время: " + meeting['start_time'] + '\n'
+	if (meeting['duration']):
+		msg += "Продолжительность: " + meeting['duration'] + '\n'
+	if (meeting['place']):
+		msg += "Место: " + meeting['place'] + '\n'
+	if (meeting['questions']):
+		for q in meeting['questions']:
+			msg += q[0] + ': ' + q[1] + '\n'
+	if (meeting['participants']):
+		msg += 'Участники:\n'
+		for p in meeting['participants']:
+			msg += '@' + p + '\n'
+	msg += "По всем вопросам обращаться к @" + str(meeting['administrator_id'])
+	return msg
 
 def get_id(update, context):
 	meeting_id = update.message.text
@@ -21,20 +41,10 @@ def get_id(update, context):
 
 	if (m == {}):
 		update.message.reply_text('Похоже, у тебя неверный идентификатор встречи.')
-		return ConversationHandler.END
+		return 1
 
-	msg = '"' + m['name'] + '" состоится ' + m['start_time'] + ' и продлится по плану ' + m['duration'] + '. Местро проведения - ' + m['place'] + '.'
-	update.message.reply_text(msg)
+	update.message.reply_text(form_output(m))
 	return ConversationHandler.END
-
-# 'id': meeting.uid,
-# 'name': meeting.name,
-# 'administrator_id': meeting.administrator_id,
-# 'start_time': meeting.start_time,
-# 'duration': meeting.duration,
-# 'place': meeting.place,
-# 'questions': parse_questions_answers(meeting),
-# 'participants': parse_participants(meeting)}
 
 get_meeting_info_handler = ConversationHandler(
 	entry_points=[CommandHandler('get_meeting_info', start_conv)],
