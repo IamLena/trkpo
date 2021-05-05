@@ -1,8 +1,10 @@
 from telegram.ext import *
+from database.Requests import *
 import Commands as cmd
 import Responses as resp
 import os
 
+create_tables()
 
 def handle_message(update, context):
 	response = resp.letsbot_responses(update.message.text)
