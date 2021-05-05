@@ -3,7 +3,7 @@ from database.Requests import *
 
 def start_conv(update, context):
 	# for test
-	# mid = add_meeting("koko", update.message.chat.id)
+	# mid = add_meeting("koko", update.message.chat.username)
 	# update.message.reply_text(str(mid))
 	update.message.reply_text('Все просто пишешь вопрос, а потом список ответов. Но сначала введи идентификатор мероприятия.\n(помни, что если ты хочешь выйти из режима добавления опроса, вызови /cancel)')
 	return 1
