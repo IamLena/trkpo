@@ -2,4 +2,5 @@ bot_srcs/Constants.py
 bot_srcs/__pycache__
 bot_srcs/.idea
 .vscode
-database/.idea
+bot_srcs/database/__pycache__
+bot_srcs/database/lets.db
