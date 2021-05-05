@@ -2,7 +2,7 @@ from telegram.ext import Updater, MessageHandler, Filters, CommandHandler, Conve
 from database.Requests import *
 
 def get_id_function(update, context):
-	user_id = update.message.chat.id
+	user_id = update.message.chat.username
 	list = get_meetings_by_user_id(user_id)
 	length = len(list)
 	if (length == 0):
