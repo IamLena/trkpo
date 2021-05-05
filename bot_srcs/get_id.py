@@ -7,7 +7,7 @@ def get_id_function(update, context):
 	length = len(list)
 	if (length == 0):
 		msg = 'Ты пока не являешься участником какого-либо мероприятия. \
-		Присоединить к встрече с помощью /join или создай свою тусовку - /create_meeting.'
+		Присоединись к встрече с помощью /join или создай свою тусовку - /create_meeting.'
 	else:
 		msg = 'Список твоих мероприятий:'
 		for meet in list:
