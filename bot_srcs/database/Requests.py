@@ -10,14 +10,14 @@ def is_valid_uuid(uuid_for_test: str):
 
 
 # Meeting
-def add_meeting(name: str, administrator_id: int):
+def add_meeting(name: str, administrator_username: str):
     try:
-        if isinstance(name, str) and isinstance(administrator_id, int):
-            meeting = Meeting.create(uid=uuid4(), name=name, administrator_id=administrator_id)
+        if isinstance(name, str) and isinstance(administrator_username, str):
+            meeting = Meeting.create(uid=uuid4(), name=name, administrator=administrator_username)
             result = meeting.uid
         else:
             result = -1
-    except PeeweeException as exc:
+    except PeeweeException:
         result = -1
     return result
 
@@ -31,7 +31,9 @@ def meeting_add_start_time(meeting_id: str, start_time: str):
             result = 0
         else:
             result = -1
-    except PeeweeException or DoesNotExist:
+    except PeeweeException:
+        result = -1
+    except DoesNotExist:
         result = -1
     return result
 
@@ -45,7 +47,9 @@ def meeting_add_duration(meeting_id: str, duration: str):
             result = 0
         else:
             result = -1
-    except PeeweeException or DoesNotExist:
+    except PeeweeException:
+        result = -1
+    except DoesNotExist:
         result = -1
     return result
 
@@ -59,7 +63,9 @@ def meeting_add_place(meeting_id: str, place: str):
             result = 0
         else:
             result = -1
-    except PeeweeException or DoesNotExist:
+    except PeeweeException:
+        result = -1
+    except DoesNotExist:
         result = -1
     return result
 
@@ -76,7 +82,7 @@ def parse_participants(meeting):
     participants = Participant.select().where(Participant.meeting_id == meeting)
     result = []
     for row in participants:
-        result.append(row.user_id)
+        result.append(row.user)
     return result
 
 
@@ -84,26 +90,28 @@ def get_meeting_info(meeting_id: str):
     try:
         if is_valid_uuid(meeting_id):
             meeting = Meeting.get_by_id(meeting_id)
-            result = {'id': meeting.uid,
+            result = {'id': str(meeting.uid),
                       'name': meeting.name,
-                      'administrator_id': meeting.administrator_id,
+                      'administrator': meeting.administrator,
                       'start_time': meeting.start_time,
-                      'duration': meeting.duration,
+                      'duration': str(meeting.duration),
                       'place': meeting.place,
                       'questions': parse_questions_answers(meeting),
                       'participants': parse_participants(meeting)}
         else:
             result = {}
-    except PeeweeException or DoesNotExist:
+    except PeeweeException:
+        result = {}
+    except DoesNotExist:
         result = {}
     return result
 
 
 # Participant
-def add_participant(meeting_id: str, participant_id: int):
+def add_participant(meeting_id: str, participant_username: str):
     try:
-        if is_valid_uuid(meeting_id) and isinstance(participant_id, int):
-            Participant.create(meeting_id=meeting_id, user_id=participant_id)
+        if is_valid_uuid(meeting_id) and isinstance(participant_username, str):
+            Participant.create(meeting_id=meeting_id, user=participant_username)
             result = 0
         else:
             result = -1
@@ -112,20 +120,23 @@ def add_participant(meeting_id: str, participant_id: int):
     return result
 
 
-def get_meetings_by_user_id(user_id: int, administrator=0):
+def get_meetings_by_user_id(user_username: str, administrator=0):
     try:
-        if isinstance(user_id, int) and administrator in (0, 1):
-            meetings = Meeting.select(Meeting.name, Meeting.uid).join(Participant).where(Participant.user_id == user_id)
+        if isinstance(user_username, str) and administrator in (0, 1):
+            meetings = Meeting.select(Meeting.name,
+                                      Meeting.uid).join(Participant).where(Participant.user == user_username)
             result = []
             for meeting in meetings:
                 if administrator != 0:
-                    if meeting.administrator_id == user_id:
+                    if meeting.administrator == user_username:
                         result.append((meeting.name, meeting.uid))
                 else:
                     result.append((meeting.name, meeting.uid))
         else:
             result = []
-    except PeeweeException or DoesNotExist:
+    except PeeweeException:
+        result = []
+    except DoesNotExist:
         result = []
     return result
 
@@ -136,10 +147,12 @@ def get_participants(meeting_id: str):
             participants = Participant.select().where(Participant.meeting_id == meeting_id)
             result = []
             for row in participants:
-                result.append(row.user_id)
+                result.append(row.user)
         else:
             result = []
-    except PeeweeException or DoesNotExist:
+    except PeeweeException:
+        result = []
+    except DoesNotExist:
         result = []
     return result
 
@@ -152,7 +165,7 @@ def add_question(meeting_id: str, question: str, options_list: str):
             result = new_question.id
         else:
             result = -1
-    except PeeweeException as exc:
+    except PeeweeException:
         result = -1
     return result
 
@@ -166,7 +179,9 @@ def get_meeting_questions(meeting_id: str):
                 result.append(row.id)
         else:
             result = []
-    except PeeweeException or DoesNotExist:
+    except PeeweeException:
+        result = []
+    except DoesNotExist:
         result = []
     return result
 
@@ -178,7 +193,9 @@ def get_options_list(question_id: int):
             result = question.option_list.split(sep=', ')
         else:
             result = []
-    except PeeweeException or DoesNotExist:
+    except PeeweeException:
+        result = []
+    except DoesNotExist:
         result = []
     return result
 
@@ -195,19 +212,21 @@ def select_option(question_id: int, selected_option: str):
             result = 0
         else:
             result = -1
-    except PeeweeException or DoesNotExist:
+    except PeeweeException:
+        result = -1
+    except DoesNotExist:
         result = -1
     return result
 
 
 # Answer
-def add_answer(question_id: int, user_id: int, selected_option: str):
+def add_answer(question_id: int, user_username: str, selected_option: str):
     try:
-        if isinstance(question_id, int) and isinstance(user_id, int) and isinstance(selected_option, str):
+        if isinstance(question_id, int) and isinstance(user_username, str) and isinstance(selected_option, str):
             options = get_options_list(question_id)
             if selected_option not in options:
                 raise PeeweeException
-            Answer.create(question_id=question_id, user_id=user_id, selected_option=selected_option)
+            Answer.create(question_id=question_id, user=user_username, selected_option=selected_option)
             result = 0
         else:
             result = -1
@@ -227,6 +246,8 @@ def get_answers(question_id: int):
                 result.append((answer.selected_option, answer.quantity))
         else:
             result = []
-    except PeeweeException or DoesNotExist:
+    except PeeweeException:
+        result = []
+    except DoesNotExist:
         result = []
     return result
