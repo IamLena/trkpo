@@ -1,11 +1,12 @@
 from telegram.ext import *
 from database.Requests import *
+from database.CreateDB import *
 import Commands as cmd
 from create_meeting import create_meeting_conv_handler
 import Responses as resp
 import os
 
-create_tables()
+initialization("database/lets.db")
 
 def handle_message(update, context):
 	response = resp.letsbot_responses(update.message.text)
