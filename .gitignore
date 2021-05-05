@@ -1,3 +1,5 @@
 bot_srcs/__pycache__
+bot_srcs/database/__pycache__
+bot_srcs/database/lets.db
 bot_srcs/.idea
 .vscode
