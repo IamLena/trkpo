@@ -26,16 +26,6 @@ class Participant(BaseModel):
             (('meeting_id', 'user'), True),
         )
 
-    class Meta:
-        indexes = (
-            (('meeting_id', 'user'), True),
-        )
-
-    class Meta:
-        indexes = (
-            (('meeting_id', 'user'), True),
-        )
-
 
 class Question(BaseModel):
     question = CharField(max_length=45)
