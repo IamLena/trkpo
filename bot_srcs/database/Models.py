@@ -11,7 +11,7 @@ class BaseModel(Model):
 class Meeting(BaseModel):
     uid = UUIDField(primary_key=True, unique=True)
     name = CharField(max_length=45)
-    administrator_id = IntegerField()
+    administrator = CharField()
     start_time = DateTimeField(null=True)
     place = CharField(max_length=45, null=True)
     duration = TimeField(null=True)
@@ -19,19 +19,19 @@ class Meeting(BaseModel):
 
 class Participant(BaseModel):
     meeting_id = ForeignKeyField(Meeting, backref='meetings')
-    user_id = IntegerField()
+    user = CharField()
 
 
 class Question(BaseModel):
     question = CharField(max_length=45)
-    option_list = CharField(100)
+    option_list = CharField(max_length=100)
     meeting_id = ForeignKeyField(Meeting)
     selected_answer = CharField(max_length=50, null=True)
 
 
 class Answer(BaseModel):
     question_id = ForeignKeyField(Question)
-    user_id = IntegerField()
+    user = CharField()
     selected_option = CharField(max_length=50)
 
 
