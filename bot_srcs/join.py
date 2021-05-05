@@ -3,7 +3,7 @@ from database.Requests import *
 
 def start_conv(update, context):
 	# for test
-	# mid = add_meeting("koko", update.message.chat.id)
+	# mid = add_meeting("koko", update.message.chat.username)
 	# update.message.reply_text(str(mid))
 	update.message.reply_text('Чтобы стать участником мероприятия, тебе необходим идентификатор. Попроси его у организатора и отправь мне, я сделаю всю остальную работу :)\nЕсли не хочешь никуда добавляться вызови /cancel')
 	return 1
@@ -18,7 +18,7 @@ def get_id(update, context):
 	if (meeting_id == '/cancel'):
 		return finish_conv(update, context)
 
-	user_id =  update.message.chat.id
+	user_id =  update.message.chat.username
 	if (add_participant(meeting_id, user_id) == -1):
 		update.message.reply_text('Похоже, у тебя неверный идентификатор встречи.')
 		return 1
