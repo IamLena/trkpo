@@ -25,6 +25,10 @@ def set_name(update, context):
 		update.message.reply_text('Произошла ошибка. Попробуй заново... Имей в виду, что имя встречи должно соддержать не более 45 символов')
 		return ConversationHandler.END
 
+	if (add_participant(meeting_id, user_id) == -1):
+		update.message.reply_text('Что-то пошло не так...')
+		return ConversationHandler.END
+
 	update.message.reply_text('Отлично.\nКогда встречаемся? Стоит придерживаться следующего формата - 1 января 2021 в 15:00, но конечно ты можешь ввести любую чепуху.')
 	return 2
 
