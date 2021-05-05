@@ -17,7 +17,7 @@ def set_name(update, context):
 	if (name == '/cancel'):
 		return finish_conv(update, context)
 
-	user_id =  update.message.chat.id # user_id =  update.message.from.id syntax error
+	user_id =  update.message.chat.username # user_id =  update.message.from...
 	global meeting_id
 	meeting_id = add_meeting(name, user_id)
 
