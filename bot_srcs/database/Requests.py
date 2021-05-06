@@ -1,4 +1,4 @@
-from database.Models import *
+from Models import *
 from peewee import PeeweeException
 from uuid import uuid4
 import re
@@ -160,6 +160,23 @@ def get_participants(meeting_id: str):
     return result
 
 
+def is_administrator(meeting_id: str, user_name: str):
+    try:
+        if is_valid_uuid(meeting_id):
+            meeting = Meeting.get_by_id(meeting_id)
+            if meeting.administrator == user_name:
+                result = True
+            else:
+                result = False
+        else:
+            result = False
+    except PeeweeException:
+        result = False
+    except DoesNotExist:
+        result = False
+    return result
+
+
 # Question
 def add_question(meeting_id: str, question: str, options_list: str):
     try:
@@ -224,6 +241,19 @@ def select_option(question_id: int, selected_option: str):
         result = -1
     return result
 
+
+def get_question_by_id(question_id: int):
+    try:
+        if isinstance(question_id, int):
+            question = Question.get_by_id(question_id)
+            result = question.question
+        else:
+            result = ''
+    except PeeweeException:
+        result = ''
+    except DoesNotExist:
+        result = ''
+    return result
 
 # Answer
 def add_answer(question_id: int, user_username: str, selected_option: str):

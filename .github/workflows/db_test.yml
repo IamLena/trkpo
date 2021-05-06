@@ -24,6 +24,6 @@ jobs:
           
       - name: run tests
         run: |
-          cd bot_srcs/database/test
+          cd bot_srcs/database
           ls
           python db_test.py

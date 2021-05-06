@@ -1,6 +1,6 @@
 import unittest
-from database.Requests import *
-from database.CreateDB import initialization
+from Requests import *
+from CreateDB import initialization
 import os
 
 
@@ -299,6 +299,34 @@ class TestParticipantsModel(unittest.TestCase):
 
         self.assertEqual(result, [])
 
+    def test_is_administrator_positive(self):
+        uid = add_meeting(test_name, test_administrator)
+
+        result = is_administrator(uid, test_administrator)
+
+        self.assertTrue(result)
+
+    def test_is_administrator_positive2(self):
+        uid = meetings[0]
+
+        result = is_administrator(uid, '@test')
+
+        self.assertFalse(result)
+
+    def test_is_administrator_negative(self):
+        uid = '16fd2706-8baf-433b-82eb-8c7fada847da'
+
+        result = is_administrator(uid, '@test')
+
+        self.assertFalse(result)
+
+    def test_is_administrator_negative2(self):
+        uid = 'kek'
+
+        result = is_administrator(uid, '@test')
+
+        self.assertFalse(result)
+
 
 class TestQuestionModel(unittest.TestCase):
     @classmethod
@@ -479,6 +507,23 @@ class TestQuestionModel(unittest.TestCase):
 
         self.assertEqual(result, -1)
         self.assertEqual(Question.get_by_id(qid).selected_answer, None)
+
+    def test_get_question_by_id_positive(self):
+        uid = meetings[0]
+        test_question = 'Что на ужин?'
+        test_options = 'Мясо, Курица'
+        qid = add_question(uid, test_question, test_options)
+
+        result = get_question_by_id(qid)
+
+        self.assertEqual(result, test_question)
+
+    def test_get_question_by_id_negative(self):
+        qid = 123
+
+        result = get_question_by_id(qid)
+
+        self.assertEqual(result, '')
 
 
 class TestAnswerModel(unittest.TestCase):
