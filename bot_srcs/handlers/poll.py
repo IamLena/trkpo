@@ -94,7 +94,8 @@ def receive_poll_answer(update, context):
 
 	for op_id in selected_options:
 		res = add_answer(q_id, update.poll_answer.user.username, options[op_id])
-		# можно тут ошибки чекнуть
+		if (res != -1):
+			update_answer(q_id)
 
 # # Close poll after three participants voted
 # if context.bot_data[poll_id]["answers"] == 3:
@@ -102,6 +103,18 @@ def receive_poll_answer(update, context):
 # 		context.bot_data[poll_id]["chat_id"], context.bot_data[poll_id]["message_id"]
 # 	)
 
+def update_answer(question_id):
+	answers = get_answers(question_id)
+	if answers:
+		selected = answers[0][0]
+		max_quantity = answers[0][1]
+		for answer in answers:
+			if answer[1] > max:
+				max_quantity = answer[1]
+				selected = answer[0]
+		result = select_option(question_id, selected)
+		return result
+	return -1
 
 poll_handler = ConversationHandler(
 	entry_points=[CommandHandler('answer_questions', start_conv)],
@@ -110,5 +123,4 @@ poll_handler = ConversationHandler(
 	},
 	fallbacks=[finish_conv]
 )
-
 poll_answer_handler = PollAnswerHandler(receive_poll_answer)
