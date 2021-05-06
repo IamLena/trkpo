@@ -15,11 +15,12 @@ from telegram.ext import (
 	MessageHandler,
 	Filters,
 	CallbackContext,
+	ConversationHandler
 )
-
+from  context import context_busy
 from database.Requests import *
 
-def my_send_poll(update, context, question, options):
+def my_send_poll(update, context, q_id, question, options):
 	message = context.bot.send_poll(
 		update.effective_chat.id,
 		question,
@@ -30,57 +31,84 @@ def my_send_poll(update, context, question, options):
 	# Save some info about the poll the bot_data for later use in receive_poll_answer
 	payload = {
 		message.poll.id: {
-			"questions": options,
+			"options": options,
 			"message_id": message.message_id,
 			"chat_id": update.effective_chat.id,
 			"answers": 0,
+			"q_id": q_id
 		}
 	}
 	context.bot_data.update(payload)
 
-def poll(update, context):
-	print("hello")
-	meeting_id = add_meeting("test", update.message.chat.username)
-	add_question(meeting_id, "hey?", "1, 2, 3, 4")
-	add_question(meeting_id, "kuku?", "5, 6, 7, 8")
-	q_id_list = get_meeting_questions(meeting_id)
+def start_conv(update, context):
+	global context_busy
+	if context_busy[0]:
+		update.message.reply_text('Сначала завершите выполнение предыдущей команды. Если тебе не хочется отвечать на вопросы вызови /cancel.')
+		return ConversationHandler.END
+	context_busy[0] = True
+	update.message.reply_text('Введите id мероприятия и ответься на предлагаемые опросы!')
+	return 1
+
+def finish_conv(update, context):
+	global context_busy
+	context_busy[0] = False
+	update.message.reply_text('ну пусть так')
+	return ConversationHandler.END
+
+
+def get_id_and_poll(update, context):
+	global context_busy
+	meeting_id = update.message.text
+	if (meeting_id == '/cancel'):
+		return finish_conv(update, context)
+
+	q_id_list = []
+	if (q_id_list = get_meeting_questions(meeting_id) == []):
+		update.message.reply_text('Похоже, у тебя неверный идентификатор встречи.')
+		update.message.reply_text('Если ты хочешь выйти из режима answer_questions вызови /cancel')
+		return 1
+
 	if (len(q_id_list) == 0):
 		update.message.reply_text('Для вас вопросов нет')
-		return
-	for q_id in q_id_list:
-		# question = get_name(q_id)
-		question = q_id
-		options = get_options_list(q_id)
-		print(question, options)
-		my_send_poll(update, context, question, options)
+		context_busy[0] = False
+		return ConversationHandler.END
 
-def receive_poll_answer(update: Update, context: CallbackContext) -> None:
-	"""Summarize a users poll vote"""
+	for q_id in q_id_list:
+		question = get_question_by_id(q_id)
+		options = get_options_list(q_id)
+		my_send_poll(update, context, q_id, question, options)
+
+	context_busy[0] = False
+	return ConversationHandler.END
+
+def receive_poll_answer(update, context):
 	answer = update.poll_answer
 	poll_id = answer.poll_id
 	try:
-		questions = context.bot_data[poll_id]["questions"]
+		options = context.bot_data[poll_id]["options"]
 	# this means this poll answer update is from an old poll, we can't do our answering then
 	except KeyError:
 		return
+	q_id = context.bot_data[poll_id]["q_id"]
 	selected_options = answer.option_ids
-	answer_string = ""
-	for question_id in selected_options:
-		if question_id != selected_options[-1]:
-			answer_string += questions[question_id] + " and "
-		else:
-			answer_string += questions[question_id]
-	context.bot.send_message(
-		context.bot_data[poll_id]["chat_id"],
-		f"{update.effective_user.mention_html()} feels {answer_string}!",
-		parse_mode=ParseMode.HTML,
-	)
-	context.bot_data[poll_id]["answers"] += 1
-	# Close poll after three participants voted
-	if context.bot_data[poll_id]["answers"] == 3:
-		context.bot.stop_poll(
-			context.bot_data[poll_id]["chat_id"], context.bot_data[poll_id]["message_id"]
-		)
 
-poll_handler = CommandHandler('answer_questions', poll)
+	for op_id in selected_options:
+		res = add_answer(q_id, update.poll_answer.user.username, options[op_id])
+		# можно тут ошибки чекнуть
+
+# # Close poll after three participants voted
+# if context.bot_data[poll_id]["answers"] == 3:
+# 	context.bot.stop_poll(
+# 		context.bot_data[poll_id]["chat_id"], context.bot_data[poll_id]["message_id"]
+# 	)
+
+
+poll_handler = ConversationHandler(
+	entry_points=[CommandHandler('answer_questions', start_conv)],
+	states={
+	1: [MessageHandler(Filters.text, get_id_and_poll)]
+	},
+	fallbacks=[finish_conv]
+)
+
 poll_answer_handler = PollAnswerHandler(receive_poll_answer)
