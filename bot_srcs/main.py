@@ -13,6 +13,7 @@ from handlers.get_id import get_id_handler
 from handlers.join import join_handler
 from handlers.get_meeting_info import get_meeting_info_handler
 from handlers.add_question import add_question_handler
+from handlers.poll import poll_handler, poll_answer_handler
 
 from handlers.msg_responses import msg_handler
 from handlers.error import error_handler
@@ -37,6 +38,9 @@ def main():
 	dp.add_handler(get_meeting_info_handler)
 	dp.add_handler(add_question_handler)
 	dp.add_handler(create_meeting_handler)
+
+	dp.add_handler(poll_handler)
+	dp.add_handler(poll_answer_handler)
 
 	dp.add_handler(msg_handler)
 	dp.add_error_handler(error_handler)

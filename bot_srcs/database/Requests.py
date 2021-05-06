@@ -1,4 +1,4 @@
-from Models import *
+from database.Models import *
 from peewee import PeeweeException
 from uuid import uuid4
 import re
