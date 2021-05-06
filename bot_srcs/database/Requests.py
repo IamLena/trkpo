@@ -93,7 +93,7 @@ def get_meeting_info(meeting_id: str):
             result = {'id': str(meeting.uid),
                       'name': meeting.name,
                       'administrator': meeting.administrator,
-                      'start_time': meeting.start_time,
+                      'start_time': str(meeting.start_time),
                       'duration': str(meeting.duration),
                       'place': meeting.place,
                       'questions': parse_questions_answers(meeting),
