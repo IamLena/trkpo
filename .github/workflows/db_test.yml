@@ -1,8 +1,7 @@
-name: DB-Test
+name: DB
 
 on:
-  push:
-    branches: [ db_develop ]
+  workflow_dispatch
 
 jobs:
   testing:
