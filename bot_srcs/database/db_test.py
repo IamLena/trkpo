@@ -508,6 +508,23 @@ class TestQuestionModel(unittest.TestCase):
         self.assertEqual(result, -1)
         self.assertEqual(Question.get_by_id(qid).selected_answer, None)
 
+    def test_get_question_by_id_positive(self):
+        uid = meetings[0]
+        test_question = 'Что на ужин?'
+        test_options = 'Мясо, Курица'
+        qid = add_question(uid, test_question, test_options)
+
+        result = get_question_by_id(qid)
+
+        self.assertEqual(result, test_question)
+
+    def test_get_question_by_id_negative(self):
+        qid = 123
+
+        result = get_question_by_id(qid)
+
+        self.assertEqual(result, '')
+
 
 class TestAnswerModel(unittest.TestCase):
     @classmethod
