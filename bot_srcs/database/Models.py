@@ -9,11 +9,20 @@ class BaseModel(Model):
 
 
 class Meeting(BaseModel):
+    """Модель мероприятия
+    Содержит информацию о мероприятии
+    """
+    #: UUID: идентификатор мероприятия (uuid v4)
     uid = UUIDField(primary_key=True, unique=True)
+    # str: название мероприятия (макс. длина - 45 символов)
     name = CharField(max_length=45)
+    # str: username администратора (макс. длина - 50 символов)
     administrator = CharField(max_length=50)
+    # datetime: время начала мероприятия
     start_time = DateTimeField(null=True)
+    # str: место проведения мероприятия
     place = CharField(max_length=45, null=True)
+    # str: продолжительность мероприятия
     duration = TimeField(null=True)
 
 
