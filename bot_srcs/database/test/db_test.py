@@ -233,6 +233,18 @@ class TestParticipantsModel(unittest.TestCase):
         self.assertEqual(result, -1)
         self.assertEqual(len(Participant.select()), before_count)
 
+    def test_add_participant_negative3(self):
+        uid = meetings[0]
+        test_participant = '@444'
+        add_participant(uid, test_participant)
+        before_count = len(Participant.select())
+
+        result = add_participant(uid, test_participant)
+
+        self.assertEqual(result, -2, 'Попытка добавление пользователя в участники,'
+                                     'хотя он уже участник этого мероприятия')
+        self.assertEqual(len(Participant.select()), before_count)
+
     def test_get_meetings_by_user_id_positive(self):
         test_name1, test_name2 = "Проверяем участников 1", "Проверяем участников 2"
         uid1 = add_meeting(test_name1, '@777')
@@ -349,9 +361,21 @@ class TestQuestionModel(unittest.TestCase):
         self.assertEqual(result, -1)
         self.assertEqual(len(Question.select()), before_count)
 
+    def test_add_question_negative4(self):
+        uid = meetings[0]
+        test_question = 'Как настроение?'
+        test_options = 'Отличное, Хорошее, Нормальное, Не очень'
+        add_question(uid, test_question, test_options)
+        before_count = len(Question.select())
+
+        result = add_question(uid, test_question, test_options)
+
+        self.assertEqual(result, -2, "Попытка добавления вопроса к мероприятию, но такой вопрос уже есть")
+        self.assertEqual(len(Question.select()), before_count)
+
     def test_get_meeting_questions_positive(self):
         uid = add_meeting("Тестовое название", test_administrator)
-        test_qs = ['Как дела?', 'Как настроение?', 'Как погода?']
+        test_qs = ['Как дела? 0', 'Как настроение? 0 ', 'Как погода? 0']
         test_os = ['Хорошо, Не очень', 'Хорошее, Плохое', 'Солнечно, Пасмурно']
         ids = []
         for i in range(len(test_qs)):
@@ -377,7 +401,7 @@ class TestQuestionModel(unittest.TestCase):
 
     def test_get_options_list_positive(self):
         uid = meetings[0]
-        test_question = 'Как дела?'
+        test_question = 'Как дела 2?'
         test_options = 'Отлично, Хорошо, Нормально, Не очень'
         qid = add_question(uid, test_question, test_options)
         expected = ['Отлично', 'Хорошо', 'Нормально', 'Не очень']
@@ -414,7 +438,7 @@ class TestQuestionModel(unittest.TestCase):
 
     def test_select_option_negative(self):
         uid = meetings[0]
-        test_question = 'Как там на улице?'
+        test_question = 'Как там на улице 2?'
         test_options = 'Солнечно, Пасмурно, Ветрено, Тепло'
         qid = add_question(uid, test_question, test_options)
         selected_option = 'Нормально'
@@ -434,7 +458,7 @@ class TestQuestionModel(unittest.TestCase):
 
     def test_select_option_negative3(self):
         uid = meetings[0]
-        test_question = 'Как там на улице?'
+        test_question = 'Как там на улице 3?'
         test_options = 'Солнечно, Пасмурно, Ветрено, Тепло'
         qid = add_question(uid, test_question, test_options)
         selected_option = 123
@@ -446,7 +470,7 @@ class TestQuestionModel(unittest.TestCase):
 
     def test_select_option_negative4(self):
         uid = meetings[0]
-        test_question = 'Как там на улице?'
+        test_question = 'Как там на улице 4?'
         test_options = 'Солнечно, Пасмурно, Ветрено, Тепло'
         qid = add_question(uid, test_question, test_options)
         selected_option = 'Солнечно'
