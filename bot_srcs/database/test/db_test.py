@@ -99,14 +99,6 @@ class TestMeetingModel(unittest.TestCase):
         self.assertEqual(str(Meeting.get_by_id(uid).duration), test_duration)
 
     def test_meeting_add_duration_negative(self):
-        duration = '3'
-        uid = 'kek'
-
-        result = meeting_add_duration(uid, duration)
-
-        self.assertEqual(result, -1)
-
-    def test_meeting_add_duration_negative2(self):
         duration = 2
         uid = meetings[1]
 
@@ -114,6 +106,14 @@ class TestMeetingModel(unittest.TestCase):
 
         self.assertEqual(result, -1)
         self.assertEqual(Meeting.get_by_id(uid).duration, None)
+
+    def test_meeting_add_duration_negative2(self):
+        duration = '3'
+        uid = 'kek'
+
+        result = meeting_add_duration(uid, duration)
+
+        self.assertEqual(result, -1)
 
     def test_meeting_add_duration_negative3(self):
         duration = '2'
