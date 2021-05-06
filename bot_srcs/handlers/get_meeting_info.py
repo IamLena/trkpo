@@ -4,18 +4,17 @@ from  context import context_busy
 
 def start_conv(update, context):
 	global context_busy
-	print("context_busy", context_busy)
-	if context_busy:
+	if context_busy[0]:
 		update.message.reply_text('Сначала завершите выполнение предыдущей команды. Если тебе не хочется отвечать на вопросы вызови /cancel.')
 		return ConversationHandler.END
-	context_busy = True
+	context_busy[0] = True
 	update.message.reply_text('Чтобы посмотреть сведения о мероприятии, введи идентификатор встречи. Если ты его не знаешь, выйди из режима просмотра информации с помощью /cancel и вызови /get_id. Получишь список идентификаторов встреч, участником которых ты являешься.')
 
 	return 1
 
 def finish_conv(update, context):
 	global context_busy
-	context_busy = False
+	context_busy[0] = False
 	update.message.reply_text('окей')
 	return ConversationHandler.END
 
@@ -54,7 +53,7 @@ def get_id(update, context):
 		return 1
 
 	global context_busy
-	context_busy = False
+	context_busy[0] = False
 	update.message.reply_text(form_output(m))
 	return ConversationHandler.END
 

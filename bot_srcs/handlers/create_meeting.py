@@ -6,8 +6,7 @@ meeting_id = -1
 
 def start_conv(update, context):
 	global context_busy
-	print("context_busy", context_busy)
-	context_busy = True
+	context_busy[0] = True
 	update.message.reply_text('Создадим мероприятие! \
 	Чтобы организовать встречу тебе нужно ответить на 3 вопроса \
 	о времени и месте. Начнем с названия. Придумай что-нибудь лаконичное и яркое! Чтобы выйти из режима планирования отправь "/cancel"')
@@ -15,7 +14,7 @@ def start_conv(update, context):
 
 def finish_conv(update, context):
 	global context_busy
-	context_busy = False
+	context_busy[0] = False
 	# удалить заготовку или предложить пользователю позже ее дополнить
 	update.message.reply_text('Ну ладненько. Тогда в другой раз.')
 	return ConversationHandler.END
@@ -34,12 +33,12 @@ def set_name(update, context):
 	meeting_id = add_meeting(name, user_id)
 
 	if (meeting_id == -1):
-		context_busy = False
+		context_busy[0] = False
 		update.message.reply_text('Произошла ошибка. Попробуй заново... Имей в виду, что имя встречи должно соддержать не более 45 символов')
 		return ConversationHandler.END
 
 	if (add_participant(meeting_id, user_id) == -1):
-		context_busy = False
+		context_busy[0] = False
 		update.message.reply_text('Что-то пошло не так...')
 		return ConversationHandler.END
 
@@ -58,7 +57,7 @@ def set_start_time(update, context):
 
 	if (meeting_add_start_time(meeting_id, start_time) == -1):
 		# обработка ошибки
-		context_busy = False
+		context_busy[0] = False
 		update.message.reply_text('Что-то пошло не так...')
 		return ConversationHandler.END
 
@@ -76,7 +75,7 @@ def set_duration(update, context):
 	if (meeting_add_duration(meeting_id, duration) == -1):
 		# обработка ошибки
 		global context_busy
-		context_busy = False
+		context_busy[0] = False
 		update.message.reply_text('Что-то пошло не так...')
 		return ConversationHandler.END
 
@@ -105,7 +104,7 @@ def set_place(update, context):
 		update.message.reply_text('Отправь его друзьям, чтобы они поучаствовали в опросах и смогли получить полную информацию о встрече.\nЕсли ты хочешь дополнить организацию еще вопросами, воспользуйся командой /add_question.')
 
 	global context_busy
-	context_busy = False
+	context_busy[0] = False
 	return ConversationHandler.END
 
 create_meeting_handler = ConversationHandler(
