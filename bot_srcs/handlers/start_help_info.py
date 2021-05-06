@@ -1,3 +1,5 @@
+from telegram.ext import CommandHandler
+
 def start_command(update, context):
 	update.message.reply_text("Привет! Чтобы узнать, зачем нужен этот бот, \
 	воспользуйся командой /info. Чтобы узнать, как его использовать, \
@@ -19,3 +21,8 @@ def help_command(update, context):
 		командой /join.\n\n/get_meeting_info отправит тебе сообщение \
 		со всей информацией о запланированной встрече.")
 	update.message.reply_text(msg)
+
+
+start_handler =  CommandHandler('start', start_command)
+help_handler =  CommandHandler('help', help_command)
+info_handler =  CommandHandler('info', info_command)

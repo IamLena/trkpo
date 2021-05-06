@@ -1,10 +1,7 @@
-from telegram.ext import Updater, MessageHandler, Filters, CommandHandler, ConversationHandler
-from database.Requests import *
+from telegram.ext import MessageHandler, Filters, CommandHandler, ConversationHandler
+from database.Requests import get_meeting_info, add_question
 
 def start_conv(update, context):
-	# for test
-	# mid = add_meeting("koko", update.message.chat.username)
-	# update.message.reply_text(str(mid))
 	update.message.reply_text('Все просто пишешь вопрос, а потом список ответов. Но сначала введи идентификатор мероприятия.\n(помни, что если ты хочешь выйти из режима добавления опроса, вызови /cancel)')
 	return 1
 
@@ -13,6 +10,7 @@ def finish_conv(update, context):
 	return ConversationHandler.END
 
 meeting_id = -1
+question = ""
 
 def get_meet_id(update, context):
 	global meeting_id
@@ -20,15 +18,13 @@ def get_meet_id(update, context):
 	if (meeting_id == '/cancel'):
 		return finish_conv(update, context)
 
-	user_id =  update.message.chat.username
-	if (add_participant(meeting_id, user_id) == -1):
+	m = get_meeting_info(meeting_id)
+	if (m == {}):
 		update.message.reply_text('Похоже, у тебя неверный идентификатор встречи.')
 		return 1
 
-	update.message.reply_text('Супер. А теперь пиши вопрос типа "Что будет кушать?"')
+	update.message.reply_text('Супер. А теперь пиши вопрос типа "Что будем кушать?"')
 	return 2
-
-question = ""
 
 def get_question(update, context):
 	global question
