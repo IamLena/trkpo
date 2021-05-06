@@ -1,11 +1,7 @@
-from telegram.ext import Updater, MessageHandler, Filters, CommandHandler, ConversationHandler
-from telegram import User
-from database.Requests import *
+from telegram.ext import MessageHandler, Filters, CommandHandler, ConversationHandler
+from database.Requests import get_meeting_info
 
 def start_conv(update, context):
-	# for test
-	mid = add_meeting("koko", update.message.chat.id)
-	update.message.reply_text(str(mid))
 	update.message.reply_text('Чтобы посмотреть сведения о мероприятии, введи идентификатор встречи. Если ты его не знаешь, выйди из режима просмотра информации с помощью /cancel и вызови /get_id. Получишь список идентификаторов встреч, участником которых ты являешься.')
 
 	return 1
@@ -24,12 +20,16 @@ def form_output(meeting):
 		msg += "Место: " + meeting['place'] + '\n'
 	if (meeting['questions']):
 		for q in meeting['questions']:
-			msg += q[0] + ': ' + q[1] + '\n'
+			msg += q[0] + ': '
+			if (q[1]):
+				msg += q[1] + '\n'
+			else:
+				msg += 'еще не выбрано\n'
 	if (meeting['participants']):
 		msg += 'Участники:\n'
 		for p in meeting['participants']:
 			msg += '@' + p + '\n'
-	msg += "По всем вопросам обращаться к @" + str(meeting['administrator_id'])
+	msg += "По всем вопросам обращаться к @" + str(meeting['administrator'])
 	return msg
 
 def get_id(update, context):

@@ -1,5 +1,5 @@
-from telegram.ext import Updater, MessageHandler, Filters, CommandHandler, ConversationHandler
-from database.Requests import *
+from telegram.ext import CommandHandler
+from database.Requests import get_meetings_by_user_id
 
 def get_id_function(update, context):
 	user_id = update.message.chat.username

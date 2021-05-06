@@ -1,5 +1,7 @@
-from telegram.ext import Updater, MessageHandler, Filters, CommandHandler, ConversationHandler
-from database.Requests import *
+from telegram.ext import MessageHandler, Filters, CommandHandler, ConversationHandler
+from database.Requests import add_meeting, add_participant, meeting_add_start_time, meeting_add_duration, meeting_add_place, get_meeting_info
+
+meeting_id = -1
 
 def start_conv(update, context):
 	update.message.reply_text('Создадим мероприятие! \
@@ -17,7 +19,7 @@ def set_name(update, context):
 	if (name == '/cancel'):
 		return finish_conv(update, context)
 
-	user_id =  update.message.chat.username # user_id =  update.message.from...
+	user_id =  update.message.chat.username
 	global meeting_id
 	meeting_id = add_meeting(name, user_id)
 
@@ -80,7 +82,7 @@ def set_place(update, context):
 
 	return ConversationHandler.END
 
-create_meeting_conv_handler = ConversationHandler(
+create_meeting_handler = ConversationHandler(
 	entry_points=[CommandHandler('create_meeting', start_conv)],
 	states={
 	1: [MessageHandler(Filters.text, set_name)],
