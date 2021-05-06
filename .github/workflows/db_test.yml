@@ -1,7 +1,9 @@
 name: DB
 
 on:
-  workflow_dispatch
+  push:
+    paths:
+      - 'bot_srcs/database/**'
 
 jobs:
   testing:
