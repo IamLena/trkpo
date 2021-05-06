@@ -62,12 +62,12 @@ def get_id_and_poll(update, context):
 	if (meeting_id == '/cancel'):
 		return finish_conv(update, context)
 
-	q_id_list = get_meeting_questions(meeting_id)
-	if (q_id_list == []):
+	if (get_meeting_info(meeting_id) == {}):
 		update.message.reply_text('Похоже, у тебя неверный идентификатор встречи.')
 		update.message.reply_text('Если ты хочешь выйти из режима answer_questions вызови /cancel')
 		return 1
 
+	q_id_list = get_meeting_questions(meeting_id)
 	if (len(q_id_list) == 0):
 		update.message.reply_text('Для вас вопросов нет')
 		context_busy[0] = False
@@ -102,6 +102,18 @@ def receive_poll_answer(update, context):
 # 		context.bot_data[poll_id]["chat_id"], context.bot_data[poll_id]["message_id"]
 # 	)
 
+def update_answer(question_id):
+	answers = get_answers(question_id)
+	if answers:
+		selected = answers[0][0]
+		max_quantity = answers[0][1]
+		for answer in answers:
+			if answer[1] > max_quantity:
+				max_quantity = answer[1]
+				selected = answer[0]
+		result = select_option(question_id, selected)
+		return result
+	return -1
 
 poll_handler = ConversationHandler(
 	entry_points=[CommandHandler('answer_questions', start_conv)],
