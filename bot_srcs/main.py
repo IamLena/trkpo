@@ -2,6 +2,9 @@
 from telegram.ext import Updater
 from os import getenv
 
+# globals
+import context
+
 # database module
 from database.CreateDB import initialization
 
@@ -27,16 +30,16 @@ def main():
 	updater = Updater(apikey, use_context=True)
 	dp = updater.dispatcher
 
-
+	# order is important!
 	dp.add_handler(start_handler)
 	dp.add_handler(help_handler)
 	dp.add_handler(info_handler)
-
-	dp.add_handler(create_meeting_handler)
 	dp.add_handler(get_id_handler)
+
 	dp.add_handler(join_handler)
 	dp.add_handler(get_meeting_info_handler)
 	dp.add_handler(add_question_handler)
+	dp.add_handler(create_meeting_handler)
 
 	dp.add_handler(msg_handler)
 	dp.add_error_handler(error_handler)
