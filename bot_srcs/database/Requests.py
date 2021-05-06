@@ -160,6 +160,23 @@ def get_participants(meeting_id: str):
     return result
 
 
+def is_administrator(meeting_id: str, user_name: str):
+    try:
+        if is_valid_uuid(meeting_id):
+            meeting = Meeting.get_by_id(meeting_id)
+            if meeting.administrator == user_name:
+                result = True
+            else:
+                result = False
+        else:
+            result = False
+    except PeeweeException:
+        result = False
+    except DoesNotExist:
+        result = False
+    return result
+
+
 # Question
 def add_question(meeting_id: str, question: str, options_list: str):
     try:
