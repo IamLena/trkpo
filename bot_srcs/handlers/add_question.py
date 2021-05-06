@@ -4,17 +4,16 @@ from  context import context_busy
 
 def start_conv(update, context):
 	global context_busy
-	print("context_busy", context_busy)
-	if context_busy:
+	if context_busy[0]:
 		update.message.reply_text('Сначала завершите выполнение предыдущей команды. Если тебе не хочется отвечать на вопросы вызови /cancel.')
 		return ConversationHandler.END
-	context_busy = True
+	context_busy[0] = True
 	update.message.reply_text('Все просто пишешь вопрос, а потом список ответов. Но сначала введи идентификатор мероприятия.\n(помни, что если ты хочешь выйти из режима добавления опроса, вызови /cancel)')
 	return 1
 
 def finish_conv(update, context):
 	global context_busy
-	context_busy = False
+	context_busy[0] = False
 	update.message.reply_text('Ну как хочешь)')
 	return ConversationHandler.END
 
@@ -60,7 +59,7 @@ def get_options(update, context):
 		return 3
 
 	global context_busy
-	context_busy = False
+	context_busy[0] = False
 	if (add_question(meeting_id, question, options) == -1):
 		update.message.reply_text('Что-то не так. Давай поновой похоже.')
 		return ConversationHandler.END

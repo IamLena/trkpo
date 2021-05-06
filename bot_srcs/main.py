@@ -2,9 +2,6 @@
 from telegram.ext import Updater
 from os import getenv
 
-# globals
-import context
-
 # database module
 from database.CreateDB import initialization
 
