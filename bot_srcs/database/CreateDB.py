@@ -1,4 +1,4 @@
-from database.Models import db, create_tables
+from Models import db, create_tables
 
 
 def initialization(db_name):

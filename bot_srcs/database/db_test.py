@@ -1,6 +1,6 @@
 import unittest
-from database.Requests import *
-from database.CreateDB import initialization
+from Requests import *
+from CreateDB import initialization
 import os
 
 
