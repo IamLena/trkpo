@@ -1,4 +1,4 @@
-name: DB-Test
+name: DB
 
 on:
   workflow_dispatch
