@@ -299,6 +299,34 @@ class TestParticipantsModel(unittest.TestCase):
 
         self.assertEqual(result, [])
 
+    def test_is_administrator_positive(self):
+        uid = add_meeting(test_name, test_administrator)
+
+        result = is_administrator(uid, test_administrator)
+
+        self.assertTrue(result)
+
+    def test_is_administrator_positive2(self):
+        uid = meetings[0]
+
+        result = is_administrator(uid, '@test')
+
+        self.assertFalse(result)
+
+    def test_is_administrator_negative(self):
+        uid = '16fd2706-8baf-433b-82eb-8c7fada847da'
+
+        result = is_administrator(uid, '@test')
+
+        self.assertFalse(result)
+
+    def test_is_administrator_negative2(self):
+        uid = 'kek'
+
+        result = is_administrator(uid, '@test')
+
+        self.assertFalse(result)
+
 
 class TestQuestionModel(unittest.TestCase):
     @classmethod
