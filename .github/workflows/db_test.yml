@@ -2,10 +2,7 @@ name: DB-Test
 
 on:
   push:
-    branches:
-      - '*'
-    paths:
-      - 'bot_srcs/database/**'
+    branches: [ db_develop ]
 
 jobs:
   testing:
