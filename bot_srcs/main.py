@@ -2,6 +2,7 @@ from telegram.ext import *
 from database.Requests import *
 from get_meeting_info import get_meeting_info_handler
 from database.CreateDB import *
+from join import joinhandler
 import Commands as cmd
 import Responses as resp
 import os
@@ -29,6 +30,7 @@ def main():
 	dp.add_handler(CommandHandler("info", cmd.info_command))
 	dp.add_handler(CommandHandler("help", cmd.help_command))
 	dp.add_handler(get_meeting_info_handler)
+	dp.add_handler(joinhandler)
 
 	dp.add_handler(MessageHandler(Filters.text, handle_message))
 	dp.add_error_handler(error)
