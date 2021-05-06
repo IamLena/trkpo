@@ -4,6 +4,7 @@ from get_meeting_info import get_meeting_info_handler
 from join import joinhandler
 from get_id import get_id_handler
 from database.CreateDB import *
+from add_question import add_question_handler
 import Commands as cmd
 from create_meeting import create_meeting_conv_handler
 import Responses as resp
@@ -32,6 +33,7 @@ def main():
 	dp.add_handler(CommandHandler("info", cmd.info_command))
 	dp.add_handler(CommandHandler("help", cmd.help_command))
 	dp.add_handler(get_meeting_info_handler)
+	dp.add_handler(add_question_handler)
 	dp.add_handler(joinhandler)
 	dp.add_handler(get_id_handler)
 	dp.add_handler(create_meeting_conv_handler)
