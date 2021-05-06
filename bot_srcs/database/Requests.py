@@ -242,6 +242,19 @@ def select_option(question_id: int, selected_option: str):
     return result
 
 
+def get_question_by_id(question_id: int):
+    try:
+        if isinstance(question_id, int):
+            question = Question.get_by_id(question_id)
+            result = question.question
+        else:
+            result = ''
+    except PeeweeException:
+        result = ''
+    except DoesNotExist:
+        result = ''
+    return result
+
 # Answer
 def add_answer(question_id: int, user_username: str, selected_option: str):
     try:
