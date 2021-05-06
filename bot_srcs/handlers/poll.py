@@ -62,8 +62,8 @@ def get_id_and_poll(update, context):
 	if (meeting_id == '/cancel'):
 		return finish_conv(update, context)
 
-	q_id_list = []
-	if (q_id_list = get_meeting_questions(meeting_id) == []):
+	q_id_list = get_meeting_questions(meeting_id)
+	if (q_id_list == []):
 		update.message.reply_text('Похоже, у тебя неверный идентификатор встречи.')
 		update.message.reply_text('Если ты хочешь выйти из режима answer_questions вызови /cancel')
 		return 1
