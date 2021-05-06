@@ -115,8 +115,11 @@ def add_participant(meeting_id: str, participant_username: str):
             result = 0
         else:
             result = -1
-    except PeeweeException:
-        result = -1
+    except PeeweeException as exc:
+        if exc.args[0] == 'UNIQUE constraint failed: participant.meeting_id, participant.user':
+            result = -2
+        else:
+            result = -1
     return result
 
 
@@ -165,8 +168,11 @@ def add_question(meeting_id: str, question: str, options_list: str):
             result = new_question.id
         else:
             result = -1
-    except PeeweeException:
-        result = -1
+    except PeeweeException as exc:
+        if exc.args[0] == 'UNIQUE constraint failed: question.meeting_id, question.question':
+            result = -2
+        else:
+            result = -1
     return result
 
 

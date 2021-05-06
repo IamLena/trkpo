@@ -21,12 +21,22 @@ class Participant(BaseModel):
     meeting_id = ForeignKeyField(Meeting, backref='meetings')
     user = CharField()
 
+    class Meta:
+        indexes = (
+            (('meeting_id', 'user'), True),
+        )
+
 
 class Question(BaseModel):
     question = CharField(max_length=45)
     option_list = CharField(max_length=100)
     meeting_id = ForeignKeyField(Meeting)
     selected_answer = CharField(max_length=50, null=True)
+
+    class Meta:
+        indexes = (
+            (('meeting_id', 'question'), True),
+        )
 
 
 class Answer(BaseModel):
