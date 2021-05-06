@@ -16,6 +16,7 @@ from telegram.ext import (
     Filters,
     CallbackContext,
 )
+from database.Requests import get_answers, select_option
 
 my_poll = {}
 
@@ -101,6 +102,19 @@ def preview(update: Update, _: CallbackContext) -> None:
         message, reply_markup=ReplyKeyboardMarkup(button, one_time_keyboard=True)
     )
 
+
+def update_answer(question_id):
+    answers = get_answers(question_id)
+    if answers:
+        selected = answers[0][0]
+        max_quantity = answers[0][1]
+        for answer in answers:
+            if answer[1] > max:
+                max_quantity = answer[1]
+                selected = answer[0]
+        result = select_option(question_id, selected)
+        return result
+    return -1
 
 #вот тут preview можно поменять на poll
 # preview генерит опрос и вот его как вытащить я вообще не понимаю
