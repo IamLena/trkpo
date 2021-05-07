@@ -4,6 +4,7 @@ on:
   push:
     paths:
       - 'bot_srcs/database/**'
+      - 'bot_srcs/db_test.py'
 
 jobs:
   testing:
@@ -24,6 +25,6 @@ jobs:
           
       - name: run tests
         run: |
-          cd bot_srcs/database
+          cd bot_srcs
           ls
           python db_test.py
