@@ -10,7 +10,7 @@ Welcome to letsbot's documentation!
    :maxdepth: 2
    :caption: Contents:
 
-   rst/modules
+   modules
 
 
 Indices and tables

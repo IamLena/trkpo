@@ -1,4 +1,4 @@
-db\_test
+db\_test module
 ===============
 
 .. automodule:: db_test

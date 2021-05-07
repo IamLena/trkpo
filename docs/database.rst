@@ -4,6 +4,6 @@ database
 .. toctree::
    :maxdepth: 1
 
-   CreateDB
-   Models
-   Requests
+   rst/CreateDB
+   rst/Models
+   rst/Requests

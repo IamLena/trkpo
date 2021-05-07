@@ -1,4 +1,4 @@
-context
+context module
 ==============
 
 .. automodule:: context

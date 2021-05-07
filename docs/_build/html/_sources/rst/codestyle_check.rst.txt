@@ -1,4 +1,4 @@
-codestyle\_check
+codestyle\_check module
 =======================
 
 .. automodule:: codestyle_check
