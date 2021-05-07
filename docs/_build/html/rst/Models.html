@@ -38,6 +38,17 @@
 <dt id="Models.Answer">
 <em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">Models.</span></code><code class="sig-name descname"><span class="pre">Answer</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#Models.Answer" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#Models.BaseModel" title="Models.BaseModel"><code class="xref py py-class docutils literal notranslate"><span class="pre">Models.BaseModel</span></code></a></p>
+<p>Модель ответа</p>
+<p>Содержит информацию об ответах на вопрос от пользователей</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>question_id</strong> (<em>int</em>) – id вопроса, на который отвечают</p></li>
+<li><p><strong>user</strong> (<em>str</em>) – username пользователя, который отвечает</p></li>
+<li><p><strong>selected_option</strong> (<em>str</em>) – выбранный ответ</p></li>
+</ul>
+</dd>
+</dl>
 <dl class="py attribute">
 <dt id="Models.Answer.DoesNotExist">
 <code class="sig-name descname"><span class="pre">DoesNotExist</span></code><a class="headerlink" href="#Models.Answer.DoesNotExist" title="Permalink to this definition">¶</a></dt>
@@ -92,8 +103,20 @@
 <dt id="Models.Meeting">
 <em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">Models.</span></code><code class="sig-name descname"><span class="pre">Meeting</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#Models.Meeting" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#Models.BaseModel" title="Models.BaseModel"><code class="xref py py-class docutils literal notranslate"><span class="pre">Models.BaseModel</span></code></a></p>
-<p>Модель мероприятия
-Содержит информацию о мероприятии</p>
+<p>Модель мероприятия</p>
+<p>Содержит информацию о мероприятии</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>uid</strong> (<em>UUID</em>) – идентификатор мероприятия (uuid v4)</p></li>
+<li><p><strong>name</strong> (<em>str</em>) – название мероприятия (макс. длина - 45 символов)</p></li>
+<li><p><strong>administrator</strong> (<em>str</em>) – username организатора (макс. длина - 50 символов)</p></li>
+<li><p><strong>start_time</strong> (<em>datetime</em>) – время начала мероприятия</p></li>
+<li><p><strong>place</strong> (<em>str</em>) – место проведения мероприятия</p></li>
+<li><p><strong>duration</strong> (<em>time</em>) – продолжительность мероприятия</p></li>
+</ul>
+</dd>
+</dl>
 <dl class="py attribute">
 <dt id="Models.Meeting.DoesNotExist">
 <code class="sig-name descname"><span class="pre">DoesNotExist</span></code><a class="headerlink" href="#Models.Meeting.DoesNotExist" title="Permalink to this definition">¶</a></dt>
@@ -138,8 +161,7 @@
 <dl class="py attribute">
 <dt id="Models.Meeting.uid">
 <code class="sig-name descname"><span class="pre">uid</span></code><em class="property"> <span class="pre">=</span> <span class="pre">&lt;UUIDField:</span> <span class="pre">Meeting.uid&gt;</span></em><a class="headerlink" href="#Models.Meeting.uid" title="Permalink to this definition">¶</a></dt>
-<dd><p>UUID: идентификатор мероприятия (uuid v4)</p>
-</dd></dl>
+<dd></dd></dl>
 
 </dd></dl>
 
@@ -147,6 +169,16 @@
 <dt id="Models.Participant">
 <em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">Models.</span></code><code class="sig-name descname"><span class="pre">Participant</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#Models.Participant" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#Models.BaseModel" title="Models.BaseModel"><code class="xref py py-class docutils literal notranslate"><span class="pre">Models.BaseModel</span></code></a></p>
+<p>Модель участника</p>
+<p>Содержит информацию об участниках мероприятия.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>meeting_id</strong> (<em>UUID</em>) – Идентификатор мероприятия</p></li>
+<li><p><strong>user</strong> (<em>str</em>) – username участника</p></li>
+</ul>
+</dd>
+</dl>
 <dl class="py attribute">
 <dt id="Models.Participant.DoesNotExist">
 <code class="sig-name descname"><span class="pre">DoesNotExist</span></code><a class="headerlink" href="#Models.Participant.DoesNotExist" title="Permalink to this definition">¶</a></dt>
@@ -179,6 +211,18 @@
 <dt id="Models.Question">
 <em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">Models.</span></code><code class="sig-name descname"><span class="pre">Question</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#Models.Question" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#Models.BaseModel" title="Models.BaseModel"><code class="xref py py-class docutils literal notranslate"><span class="pre">Models.BaseModel</span></code></a></p>
+<p>Модель вопроса</p>
+<p>Содержит информацию о вопросах мероприятия</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>question</strong> (<em>str</em>) – вопрос</p></li>
+<li><p><strong>option_list</strong> (<em>str</em>) – варианты ответов (одна строка, через запятую)</p></li>
+<li><p><strong>meeting_id</strong> (<em>UUID</em><em> (</em><em>foreign key</em><em>)</em>) – идентификатор мероприятия</p></li>
+<li><p><strong>selected_answer</strong> (<em>str</em>) – ответ, выбранный большинством после опросов</p></li>
+</ul>
+</dd>
+</dl>
 <dl class="py attribute">
 <dt id="Models.Question.DoesNotExist">
 <code class="sig-name descname"><span class="pre">DoesNotExist</span></code><a class="headerlink" href="#Models.Question.DoesNotExist" title="Permalink to this definition">¶</a></dt>
@@ -225,7 +269,8 @@
 <dl class="py function">
 <dt id="Models.create_tables">
 <code class="sig-prename descclassname"><span class="pre">Models.</span></code><code class="sig-name descname"><span class="pre">create_tables</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#Models.create_tables" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Создание таблиц</p>
+</dd></dl>
 
 </div>
 

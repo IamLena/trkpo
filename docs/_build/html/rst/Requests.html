@@ -37,70 +37,251 @@
 <dl class="py function">
 <dt id="Requests.add_answer">
 <code class="sig-prename descclassname"><span class="pre">Requests.</span></code><code class="sig-name descname"><span class="pre">add_answer</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">question_id</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">user_username</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">selected_option</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#Requests.add_answer" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Добавление ответа</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>question_id</strong> (<em>str</em>) – идентификатор вопроса</p></li>
+<li><p><strong>user_username</strong> (<em>str</em>) – username пользователя</p></li>
+<li><p><strong>selected_option</strong> (<em>str</em>) – выбранный ответ</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>0 - в случае успеха, -1 иначе</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
 
 <dl class="py function">
 <dt id="Requests.add_meeting">
 <code class="sig-prename descclassname"><span class="pre">Requests.</span></code><code class="sig-name descname"><span class="pre">add_meeting</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">administrator_username</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#Requests.add_meeting" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Добавление нового мероприятия</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>name</strong> (<em>str</em>) – название мероприятия</p></li>
+<li><p><strong>administrator_username</strong> – username организатора</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>-1, если при добавлении произошла ошибка,</p>
+</dd>
+</dl>
+<p>если успешно, то uid нового мероприятия</p>
+</dd></dl>
 
 <dl class="py function">
 <dt id="Requests.add_participant">
 <code class="sig-prename descclassname"><span class="pre">Requests.</span></code><code class="sig-name descname"><span class="pre">add_participant</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">meeting_id</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">participant_username</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#Requests.add_participant" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Добавление участников мероприятия</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>meeting_id</strong> (<em>str</em>) – идентификатор мероприятия</p></li>
+<li><p><strong>participant_username</strong> (<em>str</em>) – username частника</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>-1, если возникла ошибка,</p>
+</dd>
+</dl>
+<dl class="simple">
+<dt>-2, если участник уже состоит в мероприятии,</dt><dd><p>0 - учестник успешно добавлен</p>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
 
 <dl class="py function">
 <dt id="Requests.add_question">
 <code class="sig-prename descclassname"><span class="pre">Requests.</span></code><code class="sig-name descname"><span class="pre">add_question</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">meeting_id</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">question</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">options_list</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#Requests.add_question" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Добавление вопроса к мероприятию</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>question</strong> (<em>str</em>) – вопрос</p></li>
+<li><p><strong>meeting_id</strong> (<em>str</em>) – идентификатор мероприятия</p></li>
+<li><p><strong>options_list</strong> (<em>str</em>) – варианты ответа (через запятую)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>id нового вопроса,
+-2 если такой вопрос уже есть для этого мероприятия,
+-1 в случае ошибки</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
 
 <dl class="py function">
 <dt id="Requests.get_answers">
 <code class="sig-prename descclassname"><span class="pre">Requests.</span></code><code class="sig-name descname"><span class="pre">get_answers</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">question_id</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#Requests.get_answers" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Получение количества каждого из ответов на вопрос</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>question_id</strong> (<em>str</em>) – идентификатор вопроса</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>[(answer1, quantity1), ((answer2, quantity2)), …] - успех,</p>
+</dd>
+</dl>
+<p>иначе - []
+:rtype: list</p>
+</dd></dl>
 
 <dl class="py function">
 <dt id="Requests.get_meeting_info">
 <code class="sig-prename descclassname"><span class="pre">Requests.</span></code><code class="sig-name descname"><span class="pre">get_meeting_info</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">meeting_id</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#Requests.get_meeting_info" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Получение информации о мероприятии</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>meeting_id</strong> (<em>str</em>) – идентификатор мероприятия</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>возвращает словарь, где ключи - это атрибуты мероприятия:</p>
+</dd>
+</dl>
+<p>‘id’ - uid мероприятия (str);
+‘name’ - название мероприятия (str);
+‘administrator’ - username организатора (str);
+‘start_time’ - дата и время начала мероприятия (str);
+‘duration’ - продолжительность (str);
+‘place’ - место проведения (str);
+‘questions’ - вопросы мероприятия ([(question, selected answer), (), …]);
+‘participants’ - участники мероприятия ([user_name1, user_name2, …]).
+Пустой словарь, если возникла ошибка.
+:rtype: dict</p>
+</dd></dl>
 
 <dl class="py function">
 <dt id="Requests.get_meeting_questions">
 <code class="sig-prename descclassname"><span class="pre">Requests.</span></code><code class="sig-name descname"><span class="pre">get_meeting_questions</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">meeting_id</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#Requests.get_meeting_questions" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Получение списка id всех вопросов мероприятия</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>meeting_id</strong> (<em>str</em>) – идентификатор мероприятия</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>список id вопросов, если ошибка, то []</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>list</p>
+</dd>
+</dl>
+</dd></dl>
 
 <dl class="py function">
 <dt id="Requests.get_meetings_by_user_id">
 <code class="sig-prename descclassname"><span class="pre">Requests.</span></code><code class="sig-name descname"><span class="pre">get_meetings_by_user_id</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">user_username</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">administrator</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#Requests.get_meetings_by_user_id" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Получение списка всех мероприятий, в которых участвует пользователь</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>user_username</strong> (<em>str</em>) – username пользователя</p></li>
+<li><p><strong>administrator</strong> – тип запроса:</p></li>
+</ul>
+</dd>
+</dl>
+<p>0 - мероприятия, в которых пользователь просто участник,
+1 - мероприятия, в которых пользователь организатор
+:type administrator: (0, 1)
+:return: список мероприятий, если ошибка, то []
+:rtype: list</p>
+</dd></dl>
 
 <dl class="py function">
 <dt id="Requests.get_options_list">
 <code class="sig-prename descclassname"><span class="pre">Requests.</span></code><code class="sig-name descname"><span class="pre">get_options_list</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">question_id</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#Requests.get_options_list" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Получение списка всех вариантов ответа на вопрос</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>question_id</strong> (<em>str</em>) – идентификатор вопроса</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>список ответов, если ошибка, то []</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>list</p>
+</dd>
+</dl>
+</dd></dl>
 
 <dl class="py function">
 <dt id="Requests.get_participants">
 <code class="sig-prename descclassname"><span class="pre">Requests.</span></code><code class="sig-name descname"><span class="pre">get_participants</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">meeting_id</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#Requests.get_participants" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Получение списка всех участников мероприятия</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>meeting_id</strong> (<em>str</em>) – идентификатор мероприятия</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>список username участников, если ошибка, то []</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>list</p>
+</dd>
+</dl>
+</dd></dl>
 
 <dl class="py function">
 <dt id="Requests.get_question_by_id">
 <code class="sig-prename descclassname"><span class="pre">Requests.</span></code><code class="sig-name descname"><span class="pre">get_question_by_id</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">question_id</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#Requests.get_question_by_id" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Получение текста вопроса по его id</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>question_id</strong> (<em>str</em>) – идентификатор вопроса</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>в случае успеха - текст вопроса, иначе - пустая строка</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
 
 <dl class="py function">
 <dt id="Requests.is_administrator">
 <code class="sig-prename descclassname"><span class="pre">Requests.</span></code><code class="sig-name descname"><span class="pre">is_administrator</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">meeting_id</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">user_name</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#Requests.is_administrator" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Проверка, является ли пользователем организатором указанного мероприятия</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>user_name</strong> (<em>str</em>) – username пользователя</p></li>
+<li><p><strong>meeting_id</strong> (<em>str</em>) – идентификатор мероприятия</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>True, если является, иначе - False</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>bool</p>
+</dd>
+</dl>
+</dd></dl>
 
 <dl class="py function">
 <dt id="Requests.is_valid_uuid">
 <code class="sig-prename descclassname"><span class="pre">Requests.</span></code><code class="sig-name descname"><span class="pre">is_valid_uuid</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">uuid_for_test</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#Requests.is_valid_uuid" title="Permalink to this definition">¶</a></dt>
-<dd><p>Проверяет правильность строки в формате uuid v4</p>
+<dd><p>Проверка правильность строки в формате uuid v4</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><p><strong>uuid_for_test</strong> (<em>str</em>) – строка, которую нужно проверить</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>True, если строка соответствует формату, иначе - False</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>bool</p>
 </dd>
 </dl>
 </dd></dl>
@@ -108,32 +289,94 @@
 <dl class="py function">
 <dt id="Requests.meeting_add_duration">
 <code class="sig-prename descclassname"><span class="pre">Requests.</span></code><code class="sig-name descname"><span class="pre">meeting_add_duration</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">meeting_id</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">duration</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#Requests.meeting_add_duration" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Добавление продолжительности мероприятия</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>meeting_id</strong> (<em>str</em>) – идентификатор мероприятия</p></li>
+<li><p><strong>duration</strong> (<em>str</em>) – продолжительность мероприятия</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>-1, если возникла ошибка, 0 - успех</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
 
 <dl class="py function">
 <dt id="Requests.meeting_add_place">
 <code class="sig-prename descclassname"><span class="pre">Requests.</span></code><code class="sig-name descname"><span class="pre">meeting_add_place</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">meeting_id</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">place</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#Requests.meeting_add_place" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Добавление даты и времени начала мероприятия</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>meeting_id</strong> (<em>str</em>) – идентификатор мероприятия</p></li>
+<li><p><strong>place</strong> (<em>str</em>) – место</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>0 - успех, -1, если возникла ошибка</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
 
 <dl class="py function">
 <dt id="Requests.meeting_add_start_time">
 <code class="sig-prename descclassname"><span class="pre">Requests.</span></code><code class="sig-name descname"><span class="pre">meeting_add_start_time</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">meeting_id</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">start_time</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#Requests.meeting_add_start_time" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Добавление даты и времени начала мероприятия</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>meeting_id</strong> (<em>str</em>) – идентификатор мероприятия</p></li>
+<li><p><strong>start_time</strong> (<em>str</em>) – дата и время начала</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>-1, если возникла ошибка, 0 - успех</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
 
 <dl class="py function">
 <dt id="Requests.parse_participants">
 <code class="sig-prename descclassname"><span class="pre">Requests.</span></code><code class="sig-name descname"><span class="pre">parse_participants</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">meeting</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#Requests.parse_participants" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Вспомогательная функция</p>
+</dd></dl>
 
 <dl class="py function">
 <dt id="Requests.parse_questions_answers">
 <code class="sig-prename descclassname"><span class="pre">Requests.</span></code><code class="sig-name descname"><span class="pre">parse_questions_answers</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">meeting</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#Requests.parse_questions_answers" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Вспомогательная функция</p>
+</dd></dl>
 
 <dl class="py function">
 <dt id="Requests.select_option">
 <code class="sig-prename descclassname"><span class="pre">Requests.</span></code><code class="sig-name descname"><span class="pre">select_option</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">question_id</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">selected_option</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#Requests.select_option" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Выбор варианта ответа вопроса (после опросов)</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>question_id</strong> (<em>str</em>) – идентификатор вопроса</p></li>
+<li><p><strong>selected_option</strong> (<em>str</em>) – выбранный ответ</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>0 - успех, иначе -1</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
 
 </div>
 
