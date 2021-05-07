@@ -2,8 +2,10 @@ name: DB
 
 on:
   push:
+    branches: [ develop, main ]
     paths:
       - 'bot_srcs/database/**'
+      - 'bot_srcs/db_test.py'
 
 jobs:
   testing:
@@ -24,6 +26,5 @@ jobs:
           
       - name: run tests
         run: |
-          cd bot_srcs/database/test
-          ls
-          python db_test.py
+          cd bot_srcs
+          run db_test.py
