@@ -1,0 +1,350 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Models module &#8212; letsbot  documentation</title>
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/alabaster.css" type="text/css" />
+    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Requests module" href="Requests.html" />
+    <link rel="prev" title="CreateDB module" href="CreateDB.html" />
+   
+  <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <div class="section" id="module-Models">
+<span id="models-module"></span><h1>Models module<a class="headerlink" href="#module-Models" title="Permalink to this headline">¶</a></h1>
+<dl class="py class">
+<dt id="Models.Answer">
+<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">Models.</span></code><code class="sig-name descname"><span class="pre">Answer</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#Models.Answer" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#Models.BaseModel" title="Models.BaseModel"><code class="xref py py-class docutils literal notranslate"><span class="pre">Models.BaseModel</span></code></a></p>
+<p>Модель ответа</p>
+<p>Содержит информацию об ответах на вопрос от пользователей</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>question_id</strong> (<em>int</em>) – id вопроса, на который отвечают</p></li>
+<li><p><strong>user</strong> (<em>str</em>) – username пользователя, который отвечает</p></li>
+<li><p><strong>selected_option</strong> (<em>str</em>) – выбранный ответ</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py attribute">
+<dt id="Models.Answer.DoesNotExist">
+<code class="sig-name descname"><span class="pre">DoesNotExist</span></code><a class="headerlink" href="#Models.Answer.DoesNotExist" title="Permalink to this definition">¶</a></dt>
+<dd><p>alias of <code class="xref py py-class docutils literal notranslate"><span class="pre">Models.AnswerDoesNotExist</span></code></p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="Models.Answer.id">
+<code class="sig-name descname"><span class="pre">id</span></code><em class="property"> <span class="pre">=</span> <span class="pre">&lt;AutoField:</span> <span class="pre">Answer.id&gt;</span></em><a class="headerlink" href="#Models.Answer.id" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="Models.Answer.question_id">
+<code class="sig-name descname"><span class="pre">question_id</span></code><em class="property"> <span class="pre">=</span> <span class="pre">&lt;ForeignKeyField:</span> <span class="pre">Answer.question_id&gt;</span></em><a class="headerlink" href="#Models.Answer.question_id" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="Models.Answer.question_id_id">
+<code class="sig-name descname"><span class="pre">question_id_id</span></code><em class="property"> <span class="pre">=</span> <span class="pre">&lt;ForeignKeyField:</span> <span class="pre">Answer.question_id&gt;</span></em><a class="headerlink" href="#Models.Answer.question_id_id" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="Models.Answer.selected_option">
+<code class="sig-name descname"><span class="pre">selected_option</span></code><em class="property"> <span class="pre">=</span> <span class="pre">&lt;CharField:</span> <span class="pre">Answer.selected_option&gt;</span></em><a class="headerlink" href="#Models.Answer.selected_option" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="Models.Answer.user">
+<code class="sig-name descname"><span class="pre">user</span></code><em class="property"> <span class="pre">=</span> <span class="pre">&lt;CharField:</span> <span class="pre">Answer.user&gt;</span></em><a class="headerlink" href="#Models.Answer.user" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt id="Models.BaseModel">
+<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">Models.</span></code><code class="sig-name descname"><span class="pre">BaseModel</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#Models.BaseModel" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">peewee.Model</span></code></p>
+<dl class="py attribute">
+<dt id="Models.BaseModel.DoesNotExist">
+<code class="sig-name descname"><span class="pre">DoesNotExist</span></code><a class="headerlink" href="#Models.BaseModel.DoesNotExist" title="Permalink to this definition">¶</a></dt>
+<dd><p>alias of <code class="xref py py-class docutils literal notranslate"><span class="pre">Models.BaseModelDoesNotExist</span></code></p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="Models.BaseModel.id">
+<code class="sig-name descname"><span class="pre">id</span></code><em class="property"> <span class="pre">=</span> <span class="pre">&lt;AutoField:</span> <span class="pre">BaseModel.id&gt;</span></em><a class="headerlink" href="#Models.BaseModel.id" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt id="Models.Meeting">
+<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">Models.</span></code><code class="sig-name descname"><span class="pre">Meeting</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#Models.Meeting" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#Models.BaseModel" title="Models.BaseModel"><code class="xref py py-class docutils literal notranslate"><span class="pre">Models.BaseModel</span></code></a></p>
+<p>Модель мероприятия</p>
+<p>Содержит информацию о мероприятии</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>uid</strong> (<em>UUID</em>) – идентификатор мероприятия (uuid v4)</p></li>
+<li><p><strong>name</strong> (<em>str</em>) – название мероприятия (макс. длина - 45 символов)</p></li>
+<li><p><strong>administrator</strong> (<em>str</em>) – username организатора (макс. длина - 50 символов)</p></li>
+<li><p><strong>start_time</strong> (<em>datetime</em>) – время начала мероприятия</p></li>
+<li><p><strong>place</strong> (<em>str</em>) – место проведения мероприятия</p></li>
+<li><p><strong>duration</strong> (<em>time</em>) – продолжительность мероприятия</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py attribute">
+<dt id="Models.Meeting.DoesNotExist">
+<code class="sig-name descname"><span class="pre">DoesNotExist</span></code><a class="headerlink" href="#Models.Meeting.DoesNotExist" title="Permalink to this definition">¶</a></dt>
+<dd><p>alias of <code class="xref py py-class docutils literal notranslate"><span class="pre">Models.MeetingDoesNotExist</span></code></p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="Models.Meeting.administrator">
+<code class="sig-name descname"><span class="pre">administrator</span></code><em class="property"> <span class="pre">=</span> <span class="pre">&lt;CharField:</span> <span class="pre">Meeting.administrator&gt;</span></em><a class="headerlink" href="#Models.Meeting.administrator" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="Models.Meeting.duration">
+<code class="sig-name descname"><span class="pre">duration</span></code><em class="property"> <span class="pre">=</span> <span class="pre">&lt;TimeField:</span> <span class="pre">Meeting.duration&gt;</span></em><a class="headerlink" href="#Models.Meeting.duration" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="Models.Meeting.meetings">
+<code class="sig-name descname"><span class="pre">meetings</span></code><a class="headerlink" href="#Models.Meeting.meetings" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="Models.Meeting.name">
+<code class="sig-name descname"><span class="pre">name</span></code><em class="property"> <span class="pre">=</span> <span class="pre">&lt;CharField:</span> <span class="pre">Meeting.name&gt;</span></em><a class="headerlink" href="#Models.Meeting.name" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="Models.Meeting.place">
+<code class="sig-name descname"><span class="pre">place</span></code><em class="property"> <span class="pre">=</span> <span class="pre">&lt;CharField:</span> <span class="pre">Meeting.place&gt;</span></em><a class="headerlink" href="#Models.Meeting.place" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="Models.Meeting.question_set">
+<code class="sig-name descname"><span class="pre">question_set</span></code><a class="headerlink" href="#Models.Meeting.question_set" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="Models.Meeting.start_time">
+<code class="sig-name descname"><span class="pre">start_time</span></code><em class="property"> <span class="pre">=</span> <span class="pre">&lt;DateTimeField:</span> <span class="pre">Meeting.start_time&gt;</span></em><a class="headerlink" href="#Models.Meeting.start_time" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="Models.Meeting.uid">
+<code class="sig-name descname"><span class="pre">uid</span></code><em class="property"> <span class="pre">=</span> <span class="pre">&lt;UUIDField:</span> <span class="pre">Meeting.uid&gt;</span></em><a class="headerlink" href="#Models.Meeting.uid" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt id="Models.Participant">
+<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">Models.</span></code><code class="sig-name descname"><span class="pre">Participant</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#Models.Participant" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#Models.BaseModel" title="Models.BaseModel"><code class="xref py py-class docutils literal notranslate"><span class="pre">Models.BaseModel</span></code></a></p>
+<p>Модель участника</p>
+<p>Содержит информацию об участниках мероприятия.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>meeting_id</strong> (<em>UUID</em>) – Идентификатор мероприятия</p></li>
+<li><p><strong>user</strong> (<em>str</em>) – username участника</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py attribute">
+<dt id="Models.Participant.DoesNotExist">
+<code class="sig-name descname"><span class="pre">DoesNotExist</span></code><a class="headerlink" href="#Models.Participant.DoesNotExist" title="Permalink to this definition">¶</a></dt>
+<dd><p>alias of <code class="xref py py-class docutils literal notranslate"><span class="pre">Models.ParticipantDoesNotExist</span></code></p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="Models.Participant.id">
+<code class="sig-name descname"><span class="pre">id</span></code><em class="property"> <span class="pre">=</span> <span class="pre">&lt;AutoField:</span> <span class="pre">Participant.id&gt;</span></em><a class="headerlink" href="#Models.Participant.id" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="Models.Participant.meeting_id">
+<code class="sig-name descname"><span class="pre">meeting_id</span></code><em class="property"> <span class="pre">=</span> <span class="pre">&lt;ForeignKeyField:</span> <span class="pre">Participant.meeting_id&gt;</span></em><a class="headerlink" href="#Models.Participant.meeting_id" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="Models.Participant.meeting_id_id">
+<code class="sig-name descname"><span class="pre">meeting_id_id</span></code><em class="property"> <span class="pre">=</span> <span class="pre">&lt;ForeignKeyField:</span> <span class="pre">Participant.meeting_id&gt;</span></em><a class="headerlink" href="#Models.Participant.meeting_id_id" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="Models.Participant.user">
+<code class="sig-name descname"><span class="pre">user</span></code><em class="property"> <span class="pre">=</span> <span class="pre">&lt;CharField:</span> <span class="pre">Participant.user&gt;</span></em><a class="headerlink" href="#Models.Participant.user" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt id="Models.Question">
+<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">Models.</span></code><code class="sig-name descname"><span class="pre">Question</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#Models.Question" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#Models.BaseModel" title="Models.BaseModel"><code class="xref py py-class docutils literal notranslate"><span class="pre">Models.BaseModel</span></code></a></p>
+<p>Модель вопроса</p>
+<p>Содержит информацию о вопросах мероприятия</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>question</strong> (<em>str</em>) – вопрос</p></li>
+<li><p><strong>option_list</strong> (<em>str</em>) – варианты ответов (одна строка, через запятую)</p></li>
+<li><p><strong>meeting_id</strong> (<em>UUID</em><em> (</em><em>foreign key</em><em>)</em>) – идентификатор мероприятия</p></li>
+<li><p><strong>selected_answer</strong> (<em>str</em>) – ответ, выбранный большинством после опросов</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py attribute">
+<dt id="Models.Question.DoesNotExist">
+<code class="sig-name descname"><span class="pre">DoesNotExist</span></code><a class="headerlink" href="#Models.Question.DoesNotExist" title="Permalink to this definition">¶</a></dt>
+<dd><p>alias of <code class="xref py py-class docutils literal notranslate"><span class="pre">Models.QuestionDoesNotExist</span></code></p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="Models.Question.answer_set">
+<code class="sig-name descname"><span class="pre">answer_set</span></code><a class="headerlink" href="#Models.Question.answer_set" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="Models.Question.id">
+<code class="sig-name descname"><span class="pre">id</span></code><em class="property"> <span class="pre">=</span> <span class="pre">&lt;AutoField:</span> <span class="pre">Question.id&gt;</span></em><a class="headerlink" href="#Models.Question.id" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="Models.Question.meeting_id">
+<code class="sig-name descname"><span class="pre">meeting_id</span></code><em class="property"> <span class="pre">=</span> <span class="pre">&lt;ForeignKeyField:</span> <span class="pre">Question.meeting_id&gt;</span></em><a class="headerlink" href="#Models.Question.meeting_id" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="Models.Question.meeting_id_id">
+<code class="sig-name descname"><span class="pre">meeting_id_id</span></code><em class="property"> <span class="pre">=</span> <span class="pre">&lt;ForeignKeyField:</span> <span class="pre">Question.meeting_id&gt;</span></em><a class="headerlink" href="#Models.Question.meeting_id_id" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="Models.Question.option_list">
+<code class="sig-name descname"><span class="pre">option_list</span></code><em class="property"> <span class="pre">=</span> <span class="pre">&lt;CharField:</span> <span class="pre">Question.option_list&gt;</span></em><a class="headerlink" href="#Models.Question.option_list" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="Models.Question.question">
+<code class="sig-name descname"><span class="pre">question</span></code><em class="property"> <span class="pre">=</span> <span class="pre">&lt;CharField:</span> <span class="pre">Question.question&gt;</span></em><a class="headerlink" href="#Models.Question.question" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="Models.Question.selected_answer">
+<code class="sig-name descname"><span class="pre">selected_answer</span></code><em class="property"> <span class="pre">=</span> <span class="pre">&lt;CharField:</span> <span class="pre">Question.selected_answer&gt;</span></em><a class="headerlink" href="#Models.Question.selected_answer" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py function">
+<dt id="Models.create_tables">
+<code class="sig-prename descclassname"><span class="pre">Models.</span></code><code class="sig-name descname"><span class="pre">create_tables</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#Models.create_tables" title="Permalink to this definition">¶</a></dt>
+<dd><p>Создание таблиц</p>
+</dd></dl>
+
+</div>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../index.html">letsbot</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<p class="caption"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../modules.html">bot_srcs</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../index.html">Documentation overview</a><ul>
+  <li><a href="../modules.html">bot_srcs</a><ul>
+  <li><a href="../database.html">database</a><ul>
+      <li>Previous: <a href="CreateDB.html" title="previous chapter">CreateDB module</a></li>
+      <li>Next: <a href="Requests.html" title="next chapter">Requests module</a></li>
+  </ul></li>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2021, girls.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 3.5.4</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+      |
+      <a href="../_sources/rst/Models.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>
