@@ -55,7 +55,7 @@ def get_meet_id(update, context):
 		)
 		return 1
 
-	if not is_administrator(meeting_id, update.message.chat.id):
+	if not is_administrator(meeting_id, update.message.chat.username):
 		update.message.reply_text(
 			'Ты не являешься организатором этой встречи. '
 			'А добавлять вопрос может только он.'
