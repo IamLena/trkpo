@@ -27,4 +27,4 @@ jobs:
       - name: run tests
         run: |
           cd bot_srcs
-          run db_test.py
+          python db_test.py
