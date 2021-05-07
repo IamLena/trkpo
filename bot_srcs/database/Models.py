@@ -109,5 +109,7 @@ def create_tables():
     """
     Создание таблиц
     """
+    if not db.is_closed():
+        db.close()
     with db:
         db.create_tables([Meeting, Participant, Question, Answer])
