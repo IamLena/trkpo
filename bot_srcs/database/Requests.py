@@ -5,7 +5,8 @@ import re
 
 
 def is_valid_uuid(uuid_for_test: str):
-    regex = re.compile(r'^[a-f0-9]{8}-?[a-f0-9]{4}-?4[a-f0-9]{3}-?[89ab][a-f0-9]{3}-?[a-f0-9]{12}\Z', re.I)
+    regex = re.compile(r'^[a-f0-9]{8}-?[a-f0-9]{4}-?4[a-f0-9]{3}-?[89ab]'
+                       r'[a-f0-9]{3}-?[a-f0-9]{12}\Z', re.I)
     return bool(regex.match(str(uuid_for_test)))
 
 
@@ -13,7 +14,8 @@ def is_valid_uuid(uuid_for_test: str):
 def add_meeting(name: str, administrator_username: str):
     try:
         if isinstance(name, str) and isinstance(administrator_username, str):
-            meeting = Meeting.create(uid=uuid4(), name=name, administrator=administrator_username)
+            meeting = Meeting.create(uid=uuid4(), name=name,
+                                     administrator=administrator_username)
             result = meeting.uid
         else:
             result = -1
@@ -79,7 +81,8 @@ def parse_questions_answers(meeting):
 
 
 def parse_participants(meeting):
-    participants = Participant.select().where(Participant.meeting_id == meeting)
+    participants = Participant.select().where(Participant.meeting_id ==
+                                              meeting)
     result = []
     for row in participants:
         result.append(row.user)
@@ -111,12 +114,14 @@ def get_meeting_info(meeting_id: str):
 def add_participant(meeting_id: str, participant_username: str):
     try:
         if is_valid_uuid(meeting_id) and isinstance(participant_username, str):
-            Participant.create(meeting_id=meeting_id, user=participant_username)
+            Participant.create(meeting_id=meeting_id,
+                               user=participant_username)
             result = 0
         else:
             result = -1
     except PeeweeException as exc:
-        if exc.args[0] == 'UNIQUE constraint failed: participant.meeting_id, participant.user':
+        if exc.args[0] == 'UNIQUE constraint failed: ' \
+                          'participant.meeting_id, participant.user':
             result = -2
         else:
             result = -1
@@ -127,7 +132,8 @@ def get_meetings_by_user_id(user_username: str, administrator=0):
     try:
         if isinstance(user_username, str) and administrator in (0, 1):
             meetings = Meeting.select(Meeting.name,
-                                      Meeting.uid).join(Participant).where(Participant.user == user_username)
+                                      Meeting.uid).join(Participant).\
+                where(Participant.user == user_username)
             result = []
             for meeting in meetings:
                 if administrator != 0:
@@ -147,7 +153,8 @@ def get_meetings_by_user_id(user_username: str, administrator=0):
 def get_participants(meeting_id: str):
     try:
         if is_valid_uuid(meeting_id):
-            participants = Participant.select().where(Participant.meeting_id == meeting_id)
+            participants = Participant.select().\
+                where(Participant.meeting_id == meeting_id)
             result = []
             for row in participants:
                 result.append(row.user)
@@ -180,13 +187,17 @@ def is_administrator(meeting_id: str, user_name: str):
 # Question
 def add_question(meeting_id: str, question: str, options_list: str):
     try:
-        if is_valid_uuid(meeting_id) and isinstance(question, str) and isinstance(options_list, str):
-            new_question = Question.create(meeting_id=meeting_id, question=question, option_list=options_list)
+        if is_valid_uuid(meeting_id) and isinstance(question, str) and \
+                isinstance(options_list, str):
+            new_question = Question.create(meeting_id=meeting_id,
+                                           question=question,
+                                           option_list=options_list)
             result = new_question.id
         else:
             result = -1
     except PeeweeException as exc:
-        if exc.args[0] == 'UNIQUE constraint failed: question.meeting_id, question.question':
+        if exc.args[0] == 'UNIQUE constraint failed: ' \
+                          'question.meeting_id, question.question':
             result = -2
         else:
             result = -1
@@ -196,7 +207,8 @@ def add_question(meeting_id: str, question: str, options_list: str):
 def get_meeting_questions(meeting_id: str):
     try:
         if is_valid_uuid(meeting_id):
-            questions = Question.select().where(Question.meeting_id == meeting_id)
+            questions = Question.select().\
+                where(Question.meeting_id == meeting_id)
             result = []
             for row in questions:
                 result.append(row.id)
@@ -225,7 +237,8 @@ def get_options_list(question_id: int):
 
 def select_option(question_id: int, selected_option: str):
     try:
-        if isinstance(question_id, int) and isinstance(selected_option, str):
+        if isinstance(question_id, int) and \
+                isinstance(selected_option, str):
             options = get_options_list(question_id)
             if selected_option not in options:
                 raise PeeweeException
@@ -255,14 +268,19 @@ def get_question_by_id(question_id: int):
         result = ''
     return result
 
+
 # Answer
 def add_answer(question_id: int, user_username: str, selected_option: str):
     try:
-        if isinstance(question_id, int) and isinstance(user_username, str) and isinstance(selected_option, str):
+        if isinstance(question_id, int) and \
+                isinstance(user_username, str) and \
+                isinstance(selected_option, str):
             options = get_options_list(question_id)
             if selected_option not in options:
                 raise PeeweeException
-            Answer.create(question_id=question_id, user=user_username, selected_option=selected_option)
+            Answer.create(question_id=question_id,
+                          user=user_username,
+                          selected_option=selected_option)
             result = 0
         else:
             result = -1
@@ -276,7 +294,9 @@ def get_answers(question_id: int):
         if isinstance(question_id, int):
             answers = Answer.select(Answer.selected_option,
                                     fn.COUNT(Answer.id).alias('quantity')
-                                    ).where(Answer.question_id == question_id).group_by(Answer.selected_option)
+                                    ).\
+                where(Answer.question_id == question_id).\
+                group_by(Answer.selected_option)
             result = []
             for answer in answers:
                 result.append((answer.selected_option, answer.quantity))

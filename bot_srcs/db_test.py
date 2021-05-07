@@ -63,7 +63,8 @@ class TestMeetingModel(unittest.TestCase):
         result = meeting_add_start_time(uid, test_start_time)
 
         self.assertEqual(result, 0)
-        self.assertEqual(str(Meeting.get_by_id(uid).start_time), test_start_time)
+        self.assertEqual(str(Meeting.get_by_id(uid).start_time),
+                         test_start_time)
 
     def test_meeting_add_start_time_negative(self):
         start_time = 1234456
@@ -96,7 +97,8 @@ class TestMeetingModel(unittest.TestCase):
         result = meeting_add_duration(uid, test_duration)
 
         self.assertEqual(result, 0)
-        self.assertEqual(str(Meeting.get_by_id(uid).duration), test_duration)
+        self.assertEqual(str(Meeting.get_by_id(uid).duration),
+                         test_duration)
 
     def test_meeting_add_duration_negative(self):
         duration = 2
@@ -241,12 +243,14 @@ class TestParticipantsModel(unittest.TestCase):
 
         result = add_participant(uid, test_participant)
 
-        self.assertEqual(result, -2, 'Попытка добавление пользователя в участники,'
-                                     'хотя он уже участник этого мероприятия')
+        self.assertEqual(result, -2,
+                         'Попытка добавление пользователя в участники,'
+                         'хотя он уже участник этого мероприятия')
         self.assertEqual(len(Participant.select()), before_count)
 
     def test_get_meetings_by_user_id_positive(self):
-        test_name1, test_name2 = "Проверяем участников 1", "Проверяем участников 2"
+        test_name1, test_name2 = "Проверяем участников 1", \
+                                 "Проверяем участников 2"
         uid1 = add_meeting(test_name1, '@777')
         uid2 = add_meeting(test_name2, '@777')
         user = '@333'
@@ -353,8 +357,10 @@ class TestQuestionModel(unittest.TestCase):
 
         self.assertNotEqual(result, -1)
         self.assertEqual(len(Question.select()), before_count + 1)
-        self.assertEqual(Question.get_by_id(result).question, test_question)
-        self.assertEqual(Question.get_by_id(result).option_list, test_options)
+        self.assertEqual(Question.get_by_id(result).question,
+                         test_question)
+        self.assertEqual(Question.get_by_id(result).option_list,
+                         test_options)
 
     def test_add_question_negative(self):
         uid = meetings[1]
@@ -398,13 +404,15 @@ class TestQuestionModel(unittest.TestCase):
 
         result = add_question(uid, test_question, test_options)
 
-        self.assertEqual(result, -2, "Попытка добавления вопроса к мероприятию, но такой вопрос уже есть")
+        self.assertEqual(result, -2,
+                         "Попытка добавления вопроса к мероприятию, "
+                         "но такой вопрос уже есть")
         self.assertEqual(len(Question.select()), before_count)
 
     def test_get_meeting_questions_positive(self):
         uid = add_meeting("Тестовое название", test_administrator)
         test_qs = ['Как дела? 0', 'Как настроение? 0 ', 'Как погода? 0']
-        test_os = ['Хорошо, Не очень', 'Хорошее, Плохое', 'Солнечно, Пасмурно']
+        test_os = ['Хорошо, Не очень', 'Хорошее, Плохое', 'Солнечно']
         ids = []
         for i in range(len(test_qs)):
             ids.append(add_question(uid, test_qs[i], test_os[i]))
@@ -462,7 +470,8 @@ class TestQuestionModel(unittest.TestCase):
         result = select_option(qid, selected_option)
 
         self.assertEqual(result, 0)
-        self.assertEqual(Question.get_by_id(qid).selected_answer, selected_option)
+        self.assertEqual(Question.get_by_id(qid).selected_answer,
+                         selected_option)
 
     def test_select_option_negative(self):
         uid = meetings[0]
@@ -536,7 +545,8 @@ class TestAnswerModel(unittest.TestCase):
         meetings.append(meeting2)
         test_question = 'Как дела?'
         test_options = 'Отлично, Хорошо, Нормально, Не очень'
-        test_qid.append(add_question(meeting1, test_question, test_options))
+        test_qid.append(add_question(meeting1, test_question,
+                                     test_options))
 
     @classmethod
     def tearDownClass(cls):
