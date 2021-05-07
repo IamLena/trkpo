@@ -1,0 +1,215 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Requests module &#8212; letsbot  documentation</title>
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/alabaster.css" type="text/css" />
+    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="handlers" href="handlers.html" />
+    <link rel="prev" title="Models module" href="Models.html" />
+   
+  <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <div class="section" id="module-Requests">
+<span id="requests-module"></span><h1>Requests module<a class="headerlink" href="#module-Requests" title="Permalink to this headline">¶</a></h1>
+<dl class="py function">
+<dt id="Requests.add_answer">
+<code class="sig-prename descclassname"><span class="pre">Requests.</span></code><code class="sig-name descname"><span class="pre">add_answer</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">question_id</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">user_username</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">selected_option</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#Requests.add_answer" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt id="Requests.add_meeting">
+<code class="sig-prename descclassname"><span class="pre">Requests.</span></code><code class="sig-name descname"><span class="pre">add_meeting</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">administrator_username</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#Requests.add_meeting" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt id="Requests.add_participant">
+<code class="sig-prename descclassname"><span class="pre">Requests.</span></code><code class="sig-name descname"><span class="pre">add_participant</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">meeting_id</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">participant_username</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#Requests.add_participant" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt id="Requests.add_question">
+<code class="sig-prename descclassname"><span class="pre">Requests.</span></code><code class="sig-name descname"><span class="pre">add_question</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">meeting_id</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">question</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">options_list</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#Requests.add_question" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt id="Requests.get_answers">
+<code class="sig-prename descclassname"><span class="pre">Requests.</span></code><code class="sig-name descname"><span class="pre">get_answers</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">question_id</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#Requests.get_answers" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt id="Requests.get_meeting_info">
+<code class="sig-prename descclassname"><span class="pre">Requests.</span></code><code class="sig-name descname"><span class="pre">get_meeting_info</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">meeting_id</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#Requests.get_meeting_info" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt id="Requests.get_meeting_questions">
+<code class="sig-prename descclassname"><span class="pre">Requests.</span></code><code class="sig-name descname"><span class="pre">get_meeting_questions</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">meeting_id</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#Requests.get_meeting_questions" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt id="Requests.get_meetings_by_user_id">
+<code class="sig-prename descclassname"><span class="pre">Requests.</span></code><code class="sig-name descname"><span class="pre">get_meetings_by_user_id</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">user_username</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">administrator</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#Requests.get_meetings_by_user_id" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt id="Requests.get_options_list">
+<code class="sig-prename descclassname"><span class="pre">Requests.</span></code><code class="sig-name descname"><span class="pre">get_options_list</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">question_id</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#Requests.get_options_list" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt id="Requests.get_participants">
+<code class="sig-prename descclassname"><span class="pre">Requests.</span></code><code class="sig-name descname"><span class="pre">get_participants</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">meeting_id</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#Requests.get_participants" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt id="Requests.get_question_by_id">
+<code class="sig-prename descclassname"><span class="pre">Requests.</span></code><code class="sig-name descname"><span class="pre">get_question_by_id</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">question_id</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#Requests.get_question_by_id" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt id="Requests.is_administrator">
+<code class="sig-prename descclassname"><span class="pre">Requests.</span></code><code class="sig-name descname"><span class="pre">is_administrator</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">meeting_id</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">user_name</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#Requests.is_administrator" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt id="Requests.is_valid_uuid">
+<code class="sig-prename descclassname"><span class="pre">Requests.</span></code><code class="sig-name descname"><span class="pre">is_valid_uuid</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">uuid_for_test</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#Requests.is_valid_uuid" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt id="Requests.meeting_add_duration">
+<code class="sig-prename descclassname"><span class="pre">Requests.</span></code><code class="sig-name descname"><span class="pre">meeting_add_duration</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">meeting_id</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">duration</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#Requests.meeting_add_duration" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt id="Requests.meeting_add_place">
+<code class="sig-prename descclassname"><span class="pre">Requests.</span></code><code class="sig-name descname"><span class="pre">meeting_add_place</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">meeting_id</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">place</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#Requests.meeting_add_place" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt id="Requests.meeting_add_start_time">
+<code class="sig-prename descclassname"><span class="pre">Requests.</span></code><code class="sig-name descname"><span class="pre">meeting_add_start_time</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">meeting_id</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">start_time</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#Requests.meeting_add_start_time" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt id="Requests.parse_participants">
+<code class="sig-prename descclassname"><span class="pre">Requests.</span></code><code class="sig-name descname"><span class="pre">parse_participants</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">meeting</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#Requests.parse_participants" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt id="Requests.parse_questions_answers">
+<code class="sig-prename descclassname"><span class="pre">Requests.</span></code><code class="sig-name descname"><span class="pre">parse_questions_answers</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">meeting</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#Requests.parse_questions_answers" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt id="Requests.select_option">
+<code class="sig-prename descclassname"><span class="pre">Requests.</span></code><code class="sig-name descname"><span class="pre">select_option</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">question_id</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">selected_option</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#Requests.select_option" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</div>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../index.html">letsbot</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<p class="caption"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="modules.html">bot_srcs</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="database.html">database</a></li>
+<li class="toctree-l2"><a class="reference internal" href="handlers.html">handlers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="main.html">main</a></li>
+<li class="toctree-l2"><a class="reference internal" href="db_test.html">db_test</a></li>
+<li class="toctree-l2"><a class="reference internal" href="codestyle_check.html">codestyle_check</a></li>
+<li class="toctree-l2"><a class="reference internal" href="context.html">context</a></li>
+</ul>
+</li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../index.html">Documentation overview</a><ul>
+  <li><a href="modules.html">bot_srcs</a><ul>
+  <li><a href="database.html">database</a><ul>
+      <li>Previous: <a href="Models.html" title="previous chapter">Models module</a></li>
+      <li>Next: <a href="handlers.html" title="next chapter">handlers</a></li>
+  </ul></li>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2021, girls.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 3.5.4</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+      |
+      <a href="../_sources/rst/Requests.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>
