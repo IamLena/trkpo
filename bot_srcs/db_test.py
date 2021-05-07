@@ -197,6 +197,9 @@ class TestMeetingModel(unittest.TestCase):
 
 
 class TestParticipantsModel(unittest.TestCase):
+    """
+        Класс для тестирование модели Participants
+        """
     @classmethod
     def setUpClass(cls):
         initialization('test_lets.db')
@@ -339,6 +342,9 @@ class TestParticipantsModel(unittest.TestCase):
 
 
 class TestQuestionModel(unittest.TestCase):
+    """
+        Класс для тестирование модели Question
+        """
     @classmethod
     def setUpClass(cls):
         initialization('test_lets.db')
@@ -542,6 +548,9 @@ class TestQuestionModel(unittest.TestCase):
 
 
 class TestAnswerModel(unittest.TestCase):
+    """
+        Класс для тестирование модели Answer
+    """
     @classmethod
     def setUpClass(cls):
         initialization('test_lets.db')
