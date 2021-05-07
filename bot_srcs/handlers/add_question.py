@@ -3,8 +3,19 @@ from telegram.ext import MessageHandler, Filters, CommandHandler, \
 from database.Requests import get_meeting_info, add_question, is_administrator
 from context import context_busy
 
+"""
+Хэндлер для команды /add_question
+"""
+
 
 def start_conv(update, context):
+	"""
+	начинанае диалог
+
+	:param update: апдейт
+
+	:param contex: контекст
+	"""
 	global context_busy
 	if context_busy[0]:
 		update.message.reply_text(

@@ -3,6 +3,9 @@ from database.Requests import *
 from database.CreateDB import initialization
 import os
 
+"""
+модульные тесты (работа с базой данных)
+"""
 
 meetings = []
 test_name = 'название 1'
@@ -14,6 +17,9 @@ test_qid = []
 
 
 class TestMeetingModel(unittest.TestCase):
+    """
+    Класс для тестирование модели Meeting
+    """
     @classmethod
     def setUpClass(cls):
         initialization('test_lets.db')

@@ -3,8 +3,18 @@ from peewee import PeeweeException
 from uuid import uuid4
 import re
 
+"""
+Запросы к базе данных
+"""
+
 
 def is_valid_uuid(uuid_for_test: str):
+    """
+    Проверяет правильность строки в формате uuid v4
+
+    :param uuid_for_test: строка, которую нужно проверить
+    :type uuid_for_test: str
+    """
     regex = re.compile(r'^[a-f0-9]{8}-?[a-f0-9]{4}-?4[a-f0-9]{3}-?[89ab]'
                        r'[a-f0-9]{3}-?[a-f0-9]{12}\Z', re.I)
     return bool(regex.match(str(uuid_for_test)))
