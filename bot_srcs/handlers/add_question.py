@@ -1,14 +1,14 @@
 from telegram.ext import MessageHandler, Filters, CommandHandler, ConversationHandler
-from database.Requests import get_meeting_info, add_question
+from database.Requests import get_meeting_info, add_question, is_administrator
 from  context import context_busy
 
 def start_conv(update, context):
 	global context_busy
 	if context_busy[0]:
-		update.message.reply_text('Сначала завершите выполнение предыдущей команды. Если тебе не хочется отвечать на вопросы вызови /cancel.')
+		update.message.reply_text('Сначала заверши выполнение предыдущей команды. Если тебе не хочется отвечать на вопросы вызови /cancel.')
 		return ConversationHandler.END
 	context_busy[0] = True
-	update.message.reply_text('Все просто пишешь вопрос, а потом список ответов. Но сначала введи идентификатор мероприятия.\n(помни, что если ты хочешь выйти из режима добавления опроса, вызови /cancel)')
+	update.message.reply_text('Всё просто: пишешь вопрос, а потом список ответов. Но сначала введи идентификатор мероприятия.\n(помни, что если ты хочешь выйти из режима добавления опроса, вызови /cancel)')
 	return 1
 
 def finish_conv(update, context):
@@ -35,7 +35,13 @@ def get_meet_id(update, context):
 		update.message.reply_text('Если ты хочешь выйти из режима add_question вызови /cancel')
 		return 1
 
-	update.message.reply_text('Супер. А теперь пиши вопрос типа "Что будем кушать?"')
+	if not is_administrator(meeting_id, update.message.chat.id):
+		update.message.reply_text('Ты не являешься организатором этой встречи. А добавлять вопрос может только он.')
+		global context_busy
+		context_busy[0] = False
+		return ConversationHandler.END
+
+	update.message.reply_text('Супер. А теперь пиши вопрос, типа "Что будем кушать?"')
 	return 2
 
 def get_question(update, context):
@@ -61,10 +67,10 @@ def get_options(update, context):
 	global context_busy
 	context_busy[0] = False
 	if (add_question(meeting_id, question, options) == -1):
-		update.message.reply_text('Что-то не так. Давай поновой похоже.')
+		update.message.reply_text('Что-то не так. Давай поновой, похоже.')
 		return ConversationHandler.END
 
-	update.message.reply_text('Ну вот и ладненько. Пойду спрошу у участников, что они об этом думают!')
+	update.message.reply_text('Ну вот и ладненько. Спрошу у участников, что они об этом думают! Пройти опросы можно с помощью команды /answer_questions.')
 	return ConversationHandler.END
 
 

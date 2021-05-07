@@ -5,7 +5,7 @@ from  context import context_busy
 def start_conv(update, context):
 	global context_busy
 	if context_busy[0]:
-		update.message.reply_text('Сначала завершите выполнение предыдущей команды. Если тебе не хочется отвечать на вопросы вызови /cancel.')
+		update.message.reply_text('Сначала заверши выполнение предыдущей команды. Если тебе не хочется отвечать на вопросы вызови /cancel.')
 		return ConversationHandler.END
 	context_busy[0] = True
 	update.message.reply_text('Чтобы стать участником мероприятия, тебе необходим идентификатор. Попроси его у организатора и отправь мне, я сделаю всю остальную работу :)\nЕсли не хочешь никуда добавляться вызови /cancel')
@@ -36,7 +36,7 @@ def get_id(update, context):
 		update.message.reply_text('Ты уже являешься участником этого мероприятия!')
 		return ConversationHandler.END
 
-	update.message.reply_text('Тебя добавили в участники! Теперь ты сможешь поучаствовать в принятии решений и точно не пропустишь всю важную информацию. Чтобы получить сведения о встрече воспользуйся командой /get_meeting_info.')
+	update.message.reply_text('Тебя добавили в участники! Теперь ты сможешь поучаствовать в принятии решений (/answer_questions) и точно не пропустишь всю важную информацию (/get_meeting_info).')
 	return ConversationHandler.END
 
 join_handler = ConversationHandler(

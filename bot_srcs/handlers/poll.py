@@ -1,24 +1,13 @@
-from telegram import (
-	Poll,
-	ParseMode,
-	KeyboardButton,
-	KeyboardButtonPollType,
-	ReplyKeyboardMarkup,
-	ReplyKeyboardRemove,
-	Update,
-)
 from telegram.ext import (
 	Updater,
 	CommandHandler,
 	PollAnswerHandler,
-	PollHandler,
 	MessageHandler,
 	Filters,
-	CallbackContext,
 	ConversationHandler
 )
-from  context import context_busy
-from database.Requests import *
+from context import context_busy
+from database.Requests import get_meeting_info, get_meeting_info, get_meeting_questions, get_question_by_id, get_options_list, add_answer, get_answers, select_option
 
 def my_send_poll(update, context, q_id, question, options):
 	message = context.bot.send_poll(

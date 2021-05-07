@@ -42,7 +42,7 @@ def set_name(update, context):
 		update.message.reply_text('Что-то пошло не так...')
 		return ConversationHandler.END
 
-	update.message.reply_text('Отлично.\nКогда встречаемся? Стоит придерживаться следующего формата - 1 января 2021 в 15:00, но конечно ты можешь ввести любую чепуху.')
+	update.message.reply_text('Отлично.	\nКогда встречаемся? Стоит придерживаться следующего формата - 1 января 2021 в 15:00, но конечно ты можешь ввести любую чепуху. Если ты не знаешь пиши /pass.')
 	return 2
 
 def set_start_time(update, context):
@@ -52,16 +52,18 @@ def set_start_time(update, context):
 	if (start_time[0] == '/'):
 		if (start_time == '/cancel'):
 			return finish_conv(update, context)
-		update.message.reply_text('Для вызова другой команды, тебе нужно завершить выполнение этой. Если тебе не хочется отвечать на вопросы вызови /cancel.')
-		return 2
+		if (start_time != '/pass'):
+			update.message.reply_text('Для вызова другой команды, тебе нужно завершить выполнение этой. Если тебе не хочется отвечать на вопросы вызови /cancel.')
+			return 2
 
-	if (meeting_add_start_time(meeting_id, start_time) == -1):
-		# обработка ошибки
-		context_busy[0] = False
-		update.message.reply_text('Что-то пошло не так...')
-		return ConversationHandler.END
+	if (start_time != '/pass'):
+		if (meeting_add_start_time(meeting_id, start_time) == -1):
+			# обработка ошибки
+			context_busy[0] = False
+			update.message.reply_text('Что-то пошло не так...')
+			return ConversationHandler.END
 
-	update.message.reply_text('Супер! Как долго планируется тусить?')
+	update.message.reply_text('Супер! Как долго планируется тусить? /pass чтобы пропустить.')
 	return 3
 
 def set_duration(update, context):
@@ -69,41 +71,44 @@ def set_duration(update, context):
 	if (duration[0] == '/'):
 		if (duration == '/cancel'):
 			return finish_conv(update, context)
-		update.message.reply_text('Для вызова другой команды, тебе нужно завершить выполнение этой. Если тебе не хочется отвечать на вопросы вызови /cancel.')
-		return 3
+		if (duration != '/pass'):
+			update.message.reply_text('Для вызова другой команды, тебе нужно завершить выполнение этой. Если тебе не хочется отвечать на вопросы вызови /cancel.')
+			return 3
 
-	if (meeting_add_duration(meeting_id, duration) == -1):
-		# обработка ошибки
-		global context_busy
-		context_busy[0] = False
-		update.message.reply_text('Что-то пошло не так...')
-		return ConversationHandler.END
+	if (duration != '/pass'):
+		if (meeting_add_duration(meeting_id, duration) == -1):
+			# обработка ошибки
+			global context_busy
+			context_busy[0] = False
+			update.message.reply_text('Что-то пошло не так...')
+			return ConversationHandler.END
 
-	update.message.reply_text('Лады. А теперь укажи место.')
+	update.message.reply_text('Лады. А теперь укажи место. Ну и конечно ты можешь пропустить и этот последний вопрос - /pass.')
 	return 4
 
 def set_place(update, context):
+	global context_busy
 	place = update.message.text
 
 	if (place[0] == '/'):
 		if (place == '/cancel'):
 			return finish_conv(update, context)
-		update.message.reply_text('Для вызова другой команды, тебе нужно завершить выполнение этой. Если тебе не хочется отвечать на вопросы вызови /cancel.')
-		return 4
+		if (place != '/pass'):
+			update.message.reply_text('Для вызова другой команды, тебе нужно завершить выполнение этой. Если тебе не хочется отвечать на вопросы вызови /cancel.')
+			return 4
 
-	if (meeting_add_place(meeting_id, place) == -1):
-		# обработка ошибки
-		update.message.reply_text('Что-то не так с базой данных')
+	if (place != '/pass'):
+		if (meeting_add_place(meeting_id, place) == -1):
+			# обработка ошибки
+			update.message.reply_text('Что-то не так с базой данных')
+			context_busy[0] = False
+			return ConversationHandler.END
 
-	else:
-		update.message.reply_text('Мероприятие создано!')
-		m = get_meeting_info(meeting_id)
-		msg = '"' + m['name'] + '" состоится ' + m['start_time'] + ' и продлится по плану ' + m['duration'] + '. Местро проведения - ' + m['place'] + '.'
-		update.message.reply_text(msg)
-		update.message.reply_text('Вот идентификатор:\n' + str(meeting_id))
-		update.message.reply_text('Отправь его друзьям, чтобы они поучаствовали в опросах и смогли получить полную информацию о встрече.\nЕсли ты хочешь дополнить организацию еще вопросами, воспользуйся командой /add_question.')
+	update.message.reply_text('Мероприятие создано! /get_meeting_info выведит всю информацию о нем.')
+	update.message.reply_text('Все пропущенные вопросы можно решить с помощью добавления опроса.')
+	update.message.reply_text('Вот идентификатор:\n' + str(meeting_id))
+	update.message.reply_text('Отправь его друзьям, чтобы они поучаствовали в опросах и смогли получить полную информацию о встрече.\nЕсли ты хочешь дополнить организацию еще вопросами, воспользуйся командой /add_question.')
 
-	global context_busy
 	context_busy[0] = False
 	return ConversationHandler.END
 

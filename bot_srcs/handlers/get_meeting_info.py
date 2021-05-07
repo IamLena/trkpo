@@ -5,10 +5,10 @@ from  context import context_busy
 def start_conv(update, context):
 	global context_busy
 	if context_busy[0]:
-		update.message.reply_text('Сначала завершите выполнение предыдущей команды. Если тебе не хочется отвечать на вопросы вызови /cancel.')
+		update.message.reply_text('Сначала заверши выполнение предыдущей команды. Если тебе не хочется отвечать на вопросы вызови /cancel.')
 		return ConversationHandler.END
 	context_busy[0] = True
-	update.message.reply_text('Чтобы посмотреть сведения о мероприятии, введи идентификатор встречи. Если ты его не знаешь, выйди из режима просмотра информации с помощью /cancel и вызови /get_id. Получишь список идентификаторов встреч, участником которых ты являешься.')
+	update.message.reply_text('Чтобы посмотреть сведения о мероприятии, введи идентификатор встречи. Если ты его не знаешь, вызови /get_id. Получишь список идентификаторов встреч, участником которых ты являешься.')
 
 	return 1
 
@@ -20,11 +20,11 @@ def finish_conv(update, context):
 
 def form_output(meeting):
 	msg = '"' + meeting['name'] + '"\n'
-	if (meeting['start_time']):
+	if (meeting['start_time'] and meeting['start_time'] != 'None'):
 		msg += "Время: " + meeting['start_time'] + '\n'
-	if (meeting['duration']):
+	if (meeting['duration'] and meeting['duration'] != 'None'):
 		msg += "Продолжительность: " + meeting['duration'] + '\n'
-	if (meeting['place']):
+	if (meeting['place'] and meeting['place'] != 'None'):
 		msg += "Место: " + meeting['place'] + '\n'
 	if (meeting['questions']):
 		for q in meeting['questions']:
