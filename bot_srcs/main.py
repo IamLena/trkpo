@@ -20,6 +20,7 @@ from handlers.error import error_handler
 
 initialization("database/lets.db")
 
+
 def main():
 	apikey = getenv("APIKEY")
 	if not apikey:
@@ -48,5 +49,6 @@ def main():
 	print("Бот запущен...")
 	updater.start_polling()
 	updater.idle()
+
 
 main()

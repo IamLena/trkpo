@@ -7,7 +7,10 @@ from telegram.ext import (
 	ConversationHandler
 )
 from context import context_busy
-from database.Requests import get_meeting_info, get_meeting_info, get_meeting_questions, get_question_by_id, get_options_list, add_answer, get_answers, select_option
+from database.Requests import get_meeting_info, get_meeting_info, \
+	get_meeting_questions, get_question_by_id, get_options_list, \
+	add_answer, get_answers, select_option
+
 
 def my_send_poll(update, context, q_id, question, options):
 	message = context.bot.send_poll(
@@ -17,7 +20,8 @@ def my_send_poll(update, context, q_id, question, options):
 		is_anonymous=False,
 		allows_multiple_answers=True,
 	)
-	# Save some info about the poll the bot_data for later use in receive_poll_answer
+	# Save some info about the poll
+	# the bot_data for later use in receive_poll_answer
 	payload = {
 		message.poll.id: {
 			"options": options,
@@ -29,14 +33,21 @@ def my_send_poll(update, context, q_id, question, options):
 	}
 	context.bot_data.update(payload)
 
+
 def start_conv(update, context):
 	global context_busy
 	if context_busy[0]:
-		update.message.reply_text('Сначала завершите выполнение предыдущей команды. Если тебе не хочется отвечать на вопросы вызови /cancel.')
+		update.message.reply_text(
+			'Сначала завершите выполнение предыдущей команды. '
+			'Если тебе не хочется отвечать на вопросы вызови /cancel.'
+		)
 		return ConversationHandler.END
 	context_busy[0] = True
-	update.message.reply_text('Введите id мероприятия и ответься на предлагаемые опросы!')
+	update.message.reply_text(
+		'Введите id мероприятия и ответься на предлагаемые опросы!'
+	)
 	return 1
+
 
 def finish_conv(update, context):
 	global context_busy
@@ -48,16 +59,20 @@ def finish_conv(update, context):
 def get_id_and_poll(update, context):
 	global context_busy
 	meeting_id = update.message.text
-	if (meeting_id == '/cancel'):
+	if meeting_id == '/cancel':
 		return finish_conv(update, context)
 
-	if (get_meeting_info(meeting_id) == {}):
-		update.message.reply_text('Похоже, у тебя неверный идентификатор встречи.')
-		update.message.reply_text('Если ты хочешь выйти из режима answer_questions вызови /cancel')
+	if get_meeting_info(meeting_id) == {}:
+		update.message.reply_text(
+			'Похоже, у тебя неверный идентификатор встречи.'
+		)
+		update.message.reply_text(
+			'Если ты хочешь выйти из режима answer_questions вызови /cancel'
+		)
 		return 1
 
 	q_id_list = get_meeting_questions(meeting_id)
-	if (len(q_id_list) == 0):
+	if len(q_id_list) == 0:
 		update.message.reply_text('Для вас вопросов нет')
 		context_busy[0] = False
 		return ConversationHandler.END
@@ -70,12 +85,14 @@ def get_id_and_poll(update, context):
 	context_busy[0] = False
 	return ConversationHandler.END
 
+
 def receive_poll_answer(update, context):
 	answer = update.poll_answer
 	poll_id = answer.poll_id
 	try:
 		options = context.bot_data[poll_id]["options"]
-	# this means this poll answer update is from an old poll, we can't do our answering then
+	# this means this poll answer update is from an old poll,
+	# we can't do our answering then
 	except KeyError:
 		return
 	q_id = context.bot_data[poll_id]["q_id"]
@@ -83,13 +100,16 @@ def receive_poll_answer(update, context):
 
 	for op_id in selected_options:
 		res = add_answer(q_id, update.poll_answer.user.username, options[op_id])
-		# можно тут ошибки чекнуть
+		if res != -1:
+			update_answer(q_id)
 
 # # Close poll after three participants voted
 # if context.bot_data[poll_id]["answers"] == 3:
 # 	context.bot.stop_poll(
-# 		context.bot_data[poll_id]["chat_id"], context.bot_data[poll_id]["message_id"]
+# 		context.bot_data[poll_id]["chat_id"],
+# 		context.bot_data[poll_id]["message_id"]
 # 	)
+
 
 def update_answer(question_id):
 	answers = get_answers(question_id)
@@ -104,10 +124,11 @@ def update_answer(question_id):
 		return result
 	return -1
 
+
 poll_handler = ConversationHandler(
 	entry_points=[CommandHandler('answer_questions', start_conv)],
 	states={
-	1: [MessageHandler(Filters.text, get_id_and_poll)]
+		1: [MessageHandler(Filters.text, get_id_and_poll)]
 	},
 	fallbacks=[finish_conv]
 )

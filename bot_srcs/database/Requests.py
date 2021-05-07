@@ -81,8 +81,8 @@ def parse_questions_answers(meeting):
 
 
 def parse_participants(meeting):
-    participants = Participant.select().where(Participant.meeting_id ==
-                                              meeting)
+    participants = Participant.select().\
+        where(Participant.meeting_id == meeting)
     result = []
     for row in participants:
         result.append(row.user)
