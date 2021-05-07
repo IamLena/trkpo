@@ -111,5 +111,5 @@ def create_tables():
     """
     if not db.is_closed():
         db.close()
-    with db:
-        db.create_tables([Meeting, Participant, Question, Answer])
+    db.connect()
+    db.create_tables([Meeting, Participant, Question, Answer])
