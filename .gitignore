@@ -3,3 +3,5 @@ bot_srcs/database/__pycache__
 bot_srcs/handlers/__pycache__
 bot_srcs/.idea
 .vscode
+bot_srcs/database/lets.db
+
